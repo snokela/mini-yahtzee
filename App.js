@@ -11,27 +11,38 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        sceneContainerStyle={{ backgroundColor: 'transparent' }}
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-
             if (route.name === 'Home') {
               iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'ios-list' : 'ios-list-outline';
+                ? 'information'
+                : 'information-outline';
+            } else if (route.name === 'Gameboard') {
+              iconName = focused
+                ? 'dice-multiple'
+                : 'dice-multiple-outline';
+            } else if (route.name === 'Scoreboard') {
+              iconName = focused
+                ? 'trophy-variant'
+                : 'trophy-variant-outline';
             }
-
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
           },
-          tabBarActiveTintColor: 'tomato',
+          tabBarActiveTintColor: '#D87093',
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Gameboard" component={Gameboard} />
+        <Tab.Screen name="Scoreboard" component={Scoreboard} />
       </Tab.Navigator>
     </NavigationContainer>
   );
