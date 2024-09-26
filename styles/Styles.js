@@ -55,15 +55,16 @@ export default StyleSheet.create({
     margin: 30,
     flexDirection: "row",
     padding: 10,
-    backgroundColor: "#73CED6",
+    backgroundColor: "#D87093",
     width: 150,
-    borderRadius: 15,
+    borderRadius: 13,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonText: {
     color:"#2B2B52",
-    fontSize: 20
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   homeContainer: {
     justifyContent: 'center',

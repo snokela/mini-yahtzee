@@ -27,6 +27,17 @@ export default function Home() {
           size={90}
           color='#D87093'
         />
+        <Text>For scoreboard enter your name...</Text>
+        <TextInput
+          onChangeText={setPlayerName}
+          autoFocus={true}
+        />
+        <Pressable
+          style={styles.button}
+          onPress={() => handlePlayerName(playerName)}
+        >
+          <Text style={styles.buttonText}>OK</Text>
+        </Pressable>
       </View>
       <Footer />
     </>
