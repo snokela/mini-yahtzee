@@ -33,18 +33,35 @@ export default function Gameboard() {
       <Col key={"dice" + i}>
         <Pressable
           key={"dice" + i}
-        onPress={() => selectDice(i)}
+          onPress={() => selectDice(i)}
         >
           <MaterialCommunityIcons
             name={board[i]}
             key={"dice" + i}
             size={50}
-          // color={'#D87093'}
-          color={getDiceColor(i)}
-          >
-          </MaterialCommunityIcons>
+            color={getDiceColor(i)}
+          />
         </Pressable>
       </Col>
+    );
+  }
+
+  const pointsToSelectRow = [];
+  for (let diceButton = 0; diceButton < MAX_SPOT; diceButton++) {
+    pointsToSelectRow.push(
+      <Col Col key={'buttonsRow' + diceButton} >
+        <Pressable
+          key={'buttonsRow' + diceButton}
+        // onPress event comes here later...
+        >
+          <MaterialCommunityIcons
+            name={'numeric-' + (diceButton + 1) + '-circle'} //numeric-1-circle...
+            key={'buttonsRow' + diceButton}
+            size={35}
+          // color comes later...
+          />
+        </Pressable>
+      </Col >
     );
   }
 
@@ -83,6 +100,9 @@ export default function Gameboard() {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
+        <Container style={styles.diceRow}>
+          <Row>{pointsToSelectRow}</Row>
+        </Container>
       </View>
       <Footer />
     </>
