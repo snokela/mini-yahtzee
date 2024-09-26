@@ -52,16 +52,16 @@ export default StyleSheet.create({
   // },
   button: {
     marginTop: 15,
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 10,
-    backgroundColor: "#D87093",
+    backgroundColor: '#D87093',
     width: 150,
     borderRadius: 13,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonText: {
-    color:"#38383a",
+    color:'#38383a',
     fontSize: 18,
     fontWeight: 'bold'
   },

@@ -15,8 +15,8 @@ export default function Gameboard() {
   const [status, setStatus] = useState('Throw dices');
   const [gameEndStatus, setGameEndStatus] = useState('false');
 
-  // if dices are selected or not
-  const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));   // is dices selected or not in the game
+  // is dices selected or not in the game
+  const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));
   // dice spots
   const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0));
   // if dice points are selected on not for spots
@@ -39,8 +39,8 @@ export default function Gameboard() {
             name={board[i]}
             key={"dice" + i}
             size={50}
-            color={'#D87093'}
-          // color={getDiceColor(i)}
+          // color={'#D87093'}
+          color={getDiceColor(i)}
           >
           </MaterialCommunityIcons>
         </Pressable>
@@ -48,10 +48,14 @@ export default function Gameboard() {
     );
   }
 
+  function getDiceColor(i) {
+    return selectedDices[i] ? '#38383a' : '#D87093';
+  }
+
   const throwDices = () => {
     for (let i = 0; i < NBR_OF_DICES; i++) {
       if (!selectedDices[i]) {
-        let randomNumber = Math.floor(Math.random() * MAX_SPOT  + 1 );
+        let randomNumber = Math.floor(Math.random() * MAX_SPOT + 1);
         board[i] = 'dice-' + randomNumber;
       }
     }
