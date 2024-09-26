@@ -33,7 +33,7 @@ export default function Gameboard() {
       <Col key={"dice" + i}>
         <Pressable
           key={"dice" + i}
-        // onPress={() => selectDice(i)}
+        onPress={() => selectDice(i)}
         >
           <MaterialCommunityIcons
             name={board[i]}
@@ -50,6 +50,12 @@ export default function Gameboard() {
 
   function getDiceColor(i) {
     return selectedDices[i] ? '#38383a' : '#D87093';
+  }
+
+  const selectDice = (i) => {
+    let dices = [...selectedDices];
+    dices[i] = selectedDices[i] ? false : true;  //selected/unselected/selected...
+    setSelectedDices(dices);
   }
 
   const throwDices = () => {
