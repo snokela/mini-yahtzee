@@ -6,7 +6,7 @@ import Footer from './Footer';
 import { NBR_OF_DICES, NBR_OF_THROWS, MIN_SPOT, MAX_SPOT, BONUS_POINTS_LIMIT, BONUS_POINTS } from '../constants/Game';
 import Styles from '../styles/Styles';
 
-export default function Scoreboard() {
+export default function Home() {
   return (
     <View>
       <Text>
