@@ -32,25 +32,24 @@ export default StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  gameboard: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+  // gameboard: {
+  //   backgroundColor: '#fff',
+  //   alignItems: 'center',
+  //   justifyContent: 'center'
+  // },
+  // gameinfo: {
+  //   backgroundColor: '#fff',
+  //   textAlign: 'center',
+  //   justifyContent: 'center',
+  //   fontSize: 20,
+  //   marginTop: 10
+  // },
+  diceRow: {
+    marginVertical: 15,
   },
-  gameinfo: {
-    backgroundColor: '#fff',
-    textAlign: 'center',
-    justifyContent: 'center',
-    fontSize: 20,
-    marginTop: 10
-  },
-  row: {
-    marginTop: 20,
-    padding: 10
-  },
-  flex: {
-    flexDirection: "row"
-  },
+  // flex: {
+  //   flexDirection: "row"
+  // },
   button: {
     marginTop: 15,
     flexDirection: "row",
@@ -71,7 +70,7 @@ export default StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
   },
-  greetingText: {
+  notifText: {
     fontSize: 18,
   },
   homeContainer: {
@@ -79,7 +78,6 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   rulesContainer: {
-    // justifyContent:  'center',
     alignItems: 'stretch',
     paddingTop: 15,
     paddingBottom: 15,

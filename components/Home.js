@@ -73,7 +73,7 @@ export default function Home({ navigation }) {
                 points more.
               </Text>
             </View>
-            <Text style={styles.greetingText}>Good luck, {playerName}!</Text>
+            <Text style={styles.notifText}>Good luck, {playerName}!</Text>
             <Pressable
               style={styles.button}
               onPress={() => navigation.navigate('Gameboard')}

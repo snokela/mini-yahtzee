@@ -63,11 +63,11 @@ export default function Gameboard() {
     <>
       <Header />
       <View style={styles.gameboardContainer}>
-        <Container>
+        <Container style={styles.diceRow}>
           <Row>{row}</Row>
         </Container>
-        <Text>Throws left: {nbrOfThrowsLeft}</Text>
-        <Text>{status}</Text>
+        <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
+        <Text style={styles.notifText}>{status}</Text>
         <Pressable
           style={styles.button}
           onPress={() => throwDices()}
