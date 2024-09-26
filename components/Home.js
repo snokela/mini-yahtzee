@@ -7,11 +7,18 @@ import { NBR_OF_DICES, NBR_OF_THROWS, MIN_SPOT, MAX_SPOT, BONUS_POINTS_LIMIT, BO
 import Styles from '../styles/Styles';
 
 export default function Home() {
+
+  const [playerName, setPlayerName] = useState('');
+  const [hasPlayerName, setHasPlayerName] = useState(false);
+
+  const handlePlayerName = (value) => {
+    if (value.trim().length > 0) {
+      setHasPlayerName(true);
+      Keyboard.dismiss();
+    }
+  }
+
   return (
-    <View>
-      <Text>
-        Home will be here...
-      </Text>
-    </View>
+    <Header />
   )
 }
