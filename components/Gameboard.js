@@ -36,8 +36,7 @@ export default function Gameboard() {
         // onPress={() => selectDice(i)}
         >
           <MaterialCommunityIcons
-            // name={board[i]}
-            name={'dice-4'}
+            name={board[i]}
             key={"dice" + i}
             size={50}
             color={'#D87093'}
@@ -52,7 +51,7 @@ export default function Gameboard() {
   const throwDices = () => {
     for (let i = 0; i < NBR_OF_DICES; i++) {
       if (!selectedDices[i]) {
-        let randomNumber = Math.floor(Math.random() * { MAX_SPOT } + { MIN_SPOT });
+        let randomNumber = Math.floor(Math.random() * MAX_SPOT  + 1 );
         board[i] = 'dice-' + randomNumber;
       }
     }
