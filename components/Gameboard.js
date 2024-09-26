@@ -13,30 +13,34 @@ export default function Gameboard() {
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
     row.push(
-      <Pressable
-          key={"row" + i}
-          // onPress={() => selectDice(i)}
+      <Col key={"dice" + i}>
+        <Pressable
+          key={"dice" + i}
+        // onPress={() => selectDice(i)}
         >
-        <MaterialCommunityIcons
-          name={board[i]}
-          key={"row" + i}
-          size={50}
+          <MaterialCommunityIcons
+            // name={board[i]}
+            name={'dice-4'}
+            key={"dice" + i}
+            size={50}
+            color={'#D87093'}
           // color={getDiceColor(i)}
-        >
-        </MaterialCommunityIcons>
-      </Pressable>
+          >
+          </MaterialCommunityIcons>
+        </Pressable>
+      </Col>
     );
   }
 
   return (
     <>
-    <Header />
-    <View>
-      <Text>
-        Gameboard will be here...
-      </Text>
-    </View>
-    <Footer />
+      <Header />
+      <View>
+        <Container>
+          <Row>{row}</Row>
+        </Container>
+      </View>
+      <Footer />
     </>
   )
 }
