@@ -6,7 +6,7 @@ export default StyleSheet.create({
     backgroundColor: '#fff'
   },
   header: {
-    marginTop: 30,
+    // marginTop: 30,
     marginBottom: 15,
     backgroundColor: '#D8BFD8',
     flexDirection: 'row',
@@ -52,7 +52,7 @@ export default StyleSheet.create({
     flexDirection: "row"
   },
   button: {
-    margin: 30,
+    marginTop: 15,
     flexDirection: "row",
     padding: 10,
     backgroundColor: "#D87093",
@@ -62,12 +62,33 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   buttonText: {
-    color:"#2B2B52",
+    color:"#38383a",
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  rulesHeadingText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: 10,
+  },
+  greetingText: {
+    fontSize: 18,
   },
   homeContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  rulesContainer: {
+    // justifyContent:  'center',
+    alignItems: 'stretch',
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingHorizontal: 20,
+  },
+  paragraph: {
+    marginBottom: 5,
+  },
+  paragraphHeading: {
+    fontWeight: 'bold',
   },
 });
