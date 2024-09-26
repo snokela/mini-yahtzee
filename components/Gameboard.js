@@ -49,13 +49,31 @@ export default function Gameboard() {
     );
   }
 
+  const throwDices = () => {
+    for (let i = 0; i < NBR_OF_DICES; i++) {
+      if (!selectedDices[i]) {
+        let randomNumber = Math.floor(Math.random() * { MAX_SPOT } + { MIN_SPOT });
+        board[i] = 'dice-' + randomNumber;
+      }
+    }
+    setNbrOfThrowsLeft(nbrOfThrowsLeft - 1);
+  }
+
   return (
     <>
       <Header />
-      <View>
+      <View style={styles.gameboardContainer}>
         <Container>
           <Row>{row}</Row>
         </Container>
+        <Text>Throws left: {nbrOfThrowsLeft}</Text>
+        <Text>{status}</Text>
+        <Pressable
+          style={styles.button}
+          onPress={() => throwDices()}
+        >
+          <Text style={styles.buttonText}>THROW DICES</Text>
+        </Pressable>
       </View>
       <Footer />
     </>

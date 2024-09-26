@@ -63,7 +63,7 @@ export default StyleSheet.create({
   },
   buttonText: {
     color:"#38383a",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   rulesHeadingText: {
@@ -90,5 +90,9 @@ export default StyleSheet.create({
   },
   paragraphHeading: {
     fontWeight: 'bold',
+  },
+  gameboardContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
