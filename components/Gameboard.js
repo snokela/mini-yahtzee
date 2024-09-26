@@ -13,7 +13,7 @@ export default function Gameboard() {
         Gameboard will be here...
       </Text>
     </View>
-    <Footer /> 
+    <Footer />
     </>
   )
 }
