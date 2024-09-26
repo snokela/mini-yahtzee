@@ -18,12 +18,14 @@ export default function Gameboard() {
   // if dices are selected or not
   const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));   // is dices selected or not in the game
   // dice spots
-  const [diceSpots, setDiceSpots] =  useState( new Array(NBR_OF_DICES).fill(0));
+  const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0));
   // if dice points are selected on not for spots
   const [selecteDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
   // total points for diffferent spots
   const [DicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
+  // name of the player
+  const [player, setPlayerName] = useState('');
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
