@@ -20,12 +20,12 @@ export default function Gameboard() {
   // dice spots
   const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0));
   // if dice points are selected on not for spots
-  const [selecteDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
+  const [selectedDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
   // total points for diffferent spots
   const [DicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
   // name of the player
-  const [player, setPlayerName] = useState('');
+  const [playerName, setPlayerName] = useState('');
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -58,7 +58,7 @@ export default function Gameboard() {
             name={'numeric-' + (diceButton + 1) + '-circle'} //numeric-1-circle...
             key={'buttonsRow' + diceButton}
             size={35}
-          // color comes later...
+            color={getDicePointsColor(diceButton)}
           />
         </Pressable>
       </Col >
@@ -67,6 +67,10 @@ export default function Gameboard() {
 
   function getDiceColor(i) {
     return selectedDices[i] ? '#38383a' : '#D87093';
+  }
+
+  function getDicePointsColor(i) {
+    return selectedDicePoints[i]  ? '#38383a' : '#D87093';
   }
 
   const selectDice = (i) => {
