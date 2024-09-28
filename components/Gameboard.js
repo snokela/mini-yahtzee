@@ -115,7 +115,7 @@ export default function Gameboard({ navigation, route }) {
         setStatus('You already selected points for ' + (i + 1));
       }
     } else {
-      setStatus('Throw ' + NBR_OF_THROWS + 'times before setting points.')
+      setStatus('Throw ' + NBR_OF_THROWS + ' times before setting points.')
     }
   }
 
@@ -151,6 +151,8 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
+        <Text style={styles.totalPointsText}>Total : 0</Text>
+        <Text>You are 63 point away from bonus</Text>
         {/* <View style={styles.pointsRowContainer}> */}
         <Container style={styles.pointsRow} >
           <Row>{pointsRow}</Row>
@@ -159,7 +161,7 @@ export default function Gameboard({ navigation, route }) {
           <Row>{pointsToSelectRow}</Row>
         </Container>
         {/* </View> */}
-        <Text style={styles.notifText}>Player: {playerName}</Text>
+        <Text style={styles.notifTextPlayer}>Player: {playerName}</Text>
       </View>
       <Footer />
     </>

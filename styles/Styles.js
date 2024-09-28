@@ -94,6 +94,16 @@ export default StyleSheet.create({
   notifText: {
     fontSize: 18,
   },
+  notifTextPlayer: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  totalPointsText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 25,
+    marginBottom: 15,
+  },
   homeContainer: {
     justifyContent: 'center',
     alignItems: 'center',
