@@ -46,6 +46,15 @@ export default function Gameboard() {
     );
   }
 
+  const pointsRow = [];
+  for (let spot = 0; spot < MAX_SPOT; spot++) {
+    pointsRow.push(
+      <Col key={'pointsRow' + spot}>
+      <Text key={'pointsRow' + spot}>0</Text>
+      </Col>
+    );
+  }
+
   const pointsToSelectRow = [];
   for (let diceButton = 0; diceButton < MAX_SPOT; diceButton++) {
     pointsToSelectRow.push(
@@ -120,6 +129,9 @@ export default function Gameboard() {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
+        <Container style={styles.diceRow}>
+          <Row>{pointsRow}</Row>
+        </Container>
         <Container style={styles.diceRow}>
           <Row>{pointsToSelectRow}</Row>
         </Container>
