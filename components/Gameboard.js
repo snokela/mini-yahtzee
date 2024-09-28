@@ -22,7 +22,7 @@ export default function Gameboard() {
   // if dice points are selected on not for spots
   const [selectedDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
   // total points for diffferent spots
-  const [DicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
+  const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
   // name of the player
   const [playerName, setPlayerName] = useState('');
@@ -69,15 +69,22 @@ export default function Gameboard() {
     return selectedDices[i] ? '#38383a' : '#D87093';
   }
 
-  function getDicePointsColor(i) {
-    return selectedDicePoints[i]  ? '#38383a' : '#D87093';
-  }
-
   const selectDice = (i) => {
     let dices = [...selectedDices];
     dices[i] = selectedDices[i] ? false : true;  //selected/unselected/selected...
     setSelectedDices(dices);
   }
+
+  function getDicePointsColor(i) {
+    return selectedDicePoints[i]  ? '#38383a' : '#D87093';
+  }
+
+  const selectDicePoints = (i) => {
+    let selectedPoints = [...selectDicePoints];
+    let points = [...dicePointsTotal];
+    selectedPoints[i] = true;
+  }
+
 
   const throwDices = () => {
     for (let i = 0; i < NBR_OF_DICES; i++) {
