@@ -89,17 +89,27 @@ export default function Gameboard() {
   }
 
   const selectDicePoints = (i) => {
-    let selectedPoints = [...selectedDicePoints];
-    let points = [...dicePointsTotal];
-    selectedPoints[i] = true;
-    // nbrOfDices = how many dice have been rolled with the same number of spots
-    let nbrOfDices = diceSpots.reduce((total, x) => (x === (i + 1) ? total + 1 : total), 0);
-    // points are calculated for the number of spots corresponding to index i.
-    // if the number of spots is 3 and it appears twice, the points will be 6 (2 * 3)
-    points[i] = nbrOfDices * (i + 1);
-    setDicePointsTotal(points);
-    setSelectedDicePoints(selectedPoints);
-    return points[i];
+    if (nbrOfThrowsLeft === 0) {
+      let selected = [...selectedDices];
+      let selectedPoints = [...selectedDicePoints];
+      let points = [...dicePointsTotal];
+      if (!selectedPoints[i]) {
+        selectedPoints[i] = true;
+        // nbrOfDices = how many dice have been rolled with the same number of spots
+        let nbrOfDices = diceSpots.reduce((total, x) => (x === (i + 1) ? total + 1 : total), 0);
+        // points are calculated for the number of spots corresponding to index i.
+        // if the number of spots is 3 and it appears twice, the points will be 6 (2 * 3)
+        points[i] = nbrOfDices * (i + 1);
+        setDicePointsTotal(points);
+        setSelectedDicePoints(selectedPoints);
+        setNbrOfThrowsLeft(NBR_OF_THROWS);
+        return points[i];
+      } else {
+        setStatus('You already selected points for ' + (i + 1));
+      }
+    } else {
+      setStatus('Throw ' + NBR_OF_THROWS + 'times before setting points.')
+    }
   }
 
   const throwDices = () => {
@@ -135,12 +145,12 @@ export default function Gameboard() {
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
         {/* <View style={styles.pointsRowContainer}> */}
-          <Container style={styles.pointsRow} >
-            <Row>{pointsRow}</Row>
-          </Container>
-          <Container style={styles.pointsToSelectRow}>
-            <Row>{pointsToSelectRow}</Row>
-          </Container>
+        <Container style={styles.pointsRow} >
+          <Row>{pointsRow}</Row>
+        </Container>
+        <Container style={styles.pointsToSelectRow}>
+          <Row>{pointsToSelectRow}</Row>
+        </Container>
         {/* </View> */}
       </View>
       <Footer />
