@@ -61,7 +61,7 @@ export default function Gameboard() {
       <Col Col key={'buttonsRow' + diceButton} >
         <Pressable
           key={'buttonsRow' + diceButton}
-        // onPress event comes here later...
+          onPress={() => selectDicePoints(diceButton)}
         >
           <MaterialCommunityIcons
             name={'numeric-' + (diceButton + 1) + '-circle'} //numeric-1-circle...
@@ -103,7 +103,6 @@ export default function Gameboard() {
     return points[i];
   }
 
-
   const throwDices = () => {
     for (let i = 0; i < NBR_OF_DICES; i++) {
       if (!selectedDices[i]) {
@@ -112,6 +111,10 @@ export default function Gameboard() {
       }
     }
     setNbrOfThrowsLeft(nbrOfThrowsLeft - 1);
+  }
+
+  function getSpotTotal(i) {
+    return dicePointsTotal[i];
   }
 
   return (
