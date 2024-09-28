@@ -50,7 +50,7 @@ export default function Gameboard() {
   for (let spot = 0; spot < MAX_SPOT; spot++) {
     pointsRow.push(
       <Col key={'pointsRow' + spot}>
-        <Text key={'pointsRow' + spot}>0</Text>
+        <Text key={'pointsRow' + spot}>{getSpotTotal(spot)}</Text>
       </Col>
     )
   }
@@ -89,12 +89,11 @@ export default function Gameboard() {
   }
 
   const selectDicePoints = (i) => {
-    let selectedPoints = [...selectDicePoints];
+    let selectedPoints = [...selectedDicePoints];
     let points = [...dicePointsTotal];
     selectedPoints[i] = true;
     // nbrOfDices = how many dice have been rolled with the same number of spots
-    let nbrOfDices = diceSpots.reduce(
-      (total, x) => (x === (i + 1) ? total + 1 : total), 0);
+    let nbrOfDices = diceSpots.reduce((total, x) => (x === (i + 1) ? total + 1 : total), 0);
     // points are calculated for the number of spots corresponding to index i.
     // if the number of spots is 3 and it appears twice, the points will be 6 (2 * 3)
     points[i] = nbrOfDices * (i + 1);
@@ -104,12 +103,15 @@ export default function Gameboard() {
   }
 
   const throwDices = () => {
+    let spots = [...diceSpots];
     for (let i = 0; i < NBR_OF_DICES; i++) {
       if (!selectedDices[i]) {
         let randomNumber = Math.floor(Math.random() * MAX_SPOT + 1);
+        spots[i] = randomNumber;
         board[i] = 'dice-' + randomNumber;
       }
     }
+    setDiceSpots(spots);
     setNbrOfThrowsLeft(nbrOfThrowsLeft - 1);
   }
 
