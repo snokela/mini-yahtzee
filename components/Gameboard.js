@@ -50,9 +50,9 @@ export default function Gameboard() {
   for (let spot = 0; spot < MAX_SPOT; spot++) {
     pointsRow.push(
       <Col key={'pointsRow' + spot}>
-      <Text key={'pointsRow' + spot}>0</Text>
+        <Text key={'pointsRow' + spot}>0</Text>
       </Col>
-    );
+    )
   }
 
   const pointsToSelectRow = [];
@@ -85,7 +85,7 @@ export default function Gameboard() {
   }
 
   function getDicePointsColor(i) {
-    return selectedDicePoints[i]  ? '#38383a' : '#D87093';
+    return selectedDicePoints[i] ? '#38383a' : '#D87093';
   }
 
   const selectDicePoints = (i) => {
@@ -94,7 +94,7 @@ export default function Gameboard() {
     selectedPoints[i] = true;
     // nbrOfDices = how many dice have been rolled with the same number of spots
     let nbrOfDices = diceSpots.reduce(
-      ( total, x ) => (x === (i + 1) ? total + 1 : total), 0);
+      (total, x) => (x === (i + 1) ? total + 1 : total), 0);
     // points are calculated for the number of spots corresponding to index i.
     // if the number of spots is 3 and it appears twice, the points will be 6 (2 * 3)
     points[i] = nbrOfDices * (i + 1);
@@ -129,12 +129,14 @@ export default function Gameboard() {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
-        <Container style={styles.diceRow}>
-          <Row>{pointsRow}</Row>
-        </Container>
-        <Container style={styles.diceRow}>
-          <Row>{pointsToSelectRow}</Row>
-        </Container>
+        {/* <View style={styles.pointsRowContainer}> */}
+          <Container style={styles.pointsRow} >
+            <Row>{pointsRow}</Row>
+          </Container>
+          <Container style={styles.pointsToSelectRow}>
+            <Row>{pointsToSelectRow}</Row>
+          </Container>
+        {/* </View> */}
       </View>
       <Footer />
     </>

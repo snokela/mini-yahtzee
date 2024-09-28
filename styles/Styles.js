@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   header: {
     // marginTop: 30,
@@ -46,6 +46,26 @@ export default StyleSheet.create({
   // },
   diceRow: {
     marginVertical: 15,
+    paddingHorizontal: 45,
+    justifyContent: 'space-around',
+
+  },
+  // pointsRowContainer: {
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   marginTop: 15,
+  // },
+  pointsRow: {
+    paddingHorizontal: 45,
+    justifyContent: 'space-around',
+    // alignItems: 'center',
+    marginLeft: 25,
+    marginTop: 20,
+  },
+  pointsToSelectRow: {
+    paddingHorizontal: 45,
+    justifyContent: 'space-around',
+    // alignItems: 'center',
   },
   // flex: {
   //   flexDirection: "row"
@@ -91,6 +111,6 @@ export default StyleSheet.create({
   },
   gameboardContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });
