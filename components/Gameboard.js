@@ -24,10 +24,12 @@ export default function Gameboard({ navigation, route }) {
   // total points for diffferent spots
   const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
+  // initial state to show the icon
+  const [showIcon, setShowIcon] = useState(true);
   // name of the player
   const [playerName, setPlayerName] = useState('');
 
-// kolme useEffectiä lopulliseen versioon
+  // kolme useEffectiä lopulliseen versioon
   useEffect(() => {
     if (playerName === '' && route.params?.player) {
       setPlayerName(route.params.player);
@@ -120,6 +122,7 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const throwDices = () => {
+    setShowIcon(false);
     let spots = [...diceSpots];
     for (let i = 0; i < NBR_OF_DICES; i++) {
       if (!selectedDices[i]) {
@@ -140,9 +143,17 @@ export default function Gameboard({ navigation, route }) {
     <>
       <Header />
       <View style={styles.gameboardContainer}>
-        <Container style={styles.diceRow}>
-          <Row>{row}</Row>
-        </Container>
+        {showIcon ? (
+          <MaterialCommunityIcons
+            name='dice-multiple'
+            size={80}
+            color='#D87093'
+          />
+        ) : (
+          <Container style={styles.diceRow}>
+            <Row>{row}</Row>
+          </Container>
+        )}
         <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
         <Text style={styles.notifText}>{status}</Text>
         <Pressable

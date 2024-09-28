@@ -96,7 +96,7 @@ export default StyleSheet.create({
   },
   notifTextPlayer: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   totalPointsText: {
     fontSize: 20,
