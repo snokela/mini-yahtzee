@@ -65,6 +65,7 @@ export default StyleSheet.create({
   pointsToSelectRow: {
     paddingHorizontal: 45,
     justifyContent: 'space-around',
+    marginBottom: 20,
     // alignItems: 'center',
   },
   // flex: {

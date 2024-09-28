@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Header from './Header';
@@ -9,7 +9,7 @@ import styles from '../styles/Styles'
 
 let board = [];
 
-export default function Gameboard() {
+export default function Gameboard({ navigation, route }) {
 
   const [nbrOfThrowsLeft, setNbrOfThrowsLeft] = useState(NBR_OF_THROWS);    //three throws for each turn --> there are a total of 18 throws in one game
   const [status, setStatus] = useState('Throw dices');
@@ -26,6 +26,13 @@ export default function Gameboard() {
 
   // name of the player
   const [playerName, setPlayerName] = useState('');
+
+// kolme useEffectiä lopulliseen versioon
+  useEffect(() => {
+    if (playerName === '' && route.params?.player) {
+      setPlayerName(route.params.player);
+    }
+  }, [])
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -152,6 +159,7 @@ export default function Gameboard() {
           <Row>{pointsToSelectRow}</Row>
         </Container>
         {/* </View> */}
+        <Text style={styles.notifText}>Player: {playerName}</Text>
       </View>
       <Footer />
     </>

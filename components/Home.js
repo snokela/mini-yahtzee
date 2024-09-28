@@ -76,7 +76,7 @@ export default function Home({ navigation }) {
             <Text style={styles.notifText}>Good luck, {playerName}!</Text>
             <Pressable
               style={styles.button}
-              onPress={() => navigation.navigate('Gameboard')}
+              onPress={() => navigation.navigate('Gameboard', {player : playerName})}
             >
               <Text style={styles.buttonText}>PLAY</Text>
             </Pressable>
