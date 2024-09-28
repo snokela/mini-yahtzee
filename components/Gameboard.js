@@ -83,6 +83,15 @@ export default function Gameboard() {
     let selectedPoints = [...selectDicePoints];
     let points = [...dicePointsTotal];
     selectedPoints[i] = true;
+    // nbrOfDices = how many dice have been rolled with the same number of spots
+    let nbrOfDices = diceSpots.reduce(
+      ( total, x ) => (x === (i + 1) ? total + 1 : total), 0);
+    // points are calculated for the number of spots corresponding to index i.
+    // if the number of spots is 3 and it appears twice, the points will be 6 (2 * 3)
+    points[i] = nbrOfDices * (i + 1);
+    setDicePointsTotal(points);
+    setSelectedDicePoints(selectedPoints);
+    return points[i];
   }
 
 
