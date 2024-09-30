@@ -144,13 +144,13 @@ export default function Gameboard({ navigation, route }) {
 
 // funktio, joka laskee TOTAL-pointsit
  function getTotalPoints() {
-  return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints +currentPoints)
+  return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
  }
   console.log(getTotalPoints());
   console.log(dicePointsTotal);
   // [0, 0, 0, 0, 15, 0]
 
-  
+
   return (
     <>
       <Header />
