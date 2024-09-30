@@ -7,6 +7,7 @@ import { NBR_OF_DICES, NBR_OF_THROWS, MIN_SPOT, MAX_SPOT, BONUS_POINTS_LIMIT, BO
 import { Container, Row, Col } from 'react-native-flex-grid';
 import styles from '../styles/Styles'
 
+// game board status
 let board = [];
 
 export default function Gameboard({ navigation, route }) {
@@ -55,6 +56,7 @@ export default function Gameboard({ navigation, route }) {
     );
   }
 
+  // Taulukko, joka näyttää kunkin silmäluvun pisteet.
   const pointsRow = [];
   for (let spot = 0; spot < MAX_SPOT; spot++) {
     pointsRow.push(
@@ -64,6 +66,7 @@ export default function Gameboard({ navigation, route }) {
     )
   }
 
+  // Taulukko, joka sisältää painikkeet pisteiden valintaan.
   const pointsToSelectRow = [];
   for (let diceButton = 0; diceButton < MAX_SPOT; diceButton++) {
     pointsToSelectRow.push(
@@ -139,6 +142,15 @@ export default function Gameboard({ navigation, route }) {
     return dicePointsTotal[i];
   }
 
+// funktio, joka laskee TOTAL-pointsit
+ function getTotalPoints() {
+  return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints +currentPoints)
+ }
+  console.log(getTotalPoints());
+  console.log(dicePointsTotal);
+  // [0, 0, 0, 0, 15, 0]
+
+  
   return (
     <>
       <Header />
@@ -162,7 +174,7 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
-        <Text style={styles.totalPointsText}>Total : 0</Text>
+        <Text style={styles.totalPointsText}>Total: {getTotalPoints()}</Text>
         <Text>You are 63 point away from bonus</Text>
         {/* <View style={styles.pointsRowContainer}> */}
         <Container style={styles.pointsRow} >
