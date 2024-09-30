@@ -20,10 +20,13 @@ export default function Gameboard({ navigation, route }) {
   const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));
   // dice spots
   const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0));
-  // if dice points are selected on not for spots
+  // if dice points are selected or not for spots
   const [selectedDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
   // total points for diffferent spots
   const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
+
+  // state to track turns ----------------------------
+  const [currentTurn, setCurrentTurn] = useState(1);
 
   // initial state to show the icon
   const [showIcon, setShowIcon] = useState(true);
@@ -115,6 +118,12 @@ export default function Gameboard({ navigation, route }) {
         setDicePointsTotal(points);
         setSelectedDicePoints(selectedPoints);
         setNbrOfThrowsLeft(NBR_OF_THROWS);
+        // lisätään kierroksia yhdellä jokaisen kolmen heiton jälkeen--------------------
+        setCurrentTurn(prev => prev + 1)
+        console.log('current-turn ' + currentTurn);
+        // nollataan noppien valinnat kolmen heiton jälkeen
+        setSelectedDices(new Array(NBR_OF_DICES).fill(false));
+        // ----------------------------------------------------------------------------
         return points[i];
       } else {
         setStatus('You already selected points for ' + (i + 1));
@@ -142,6 +151,7 @@ export default function Gameboard({ navigation, route }) {
     return dicePointsTotal[i];
   }
 
+// ------------------------------------------------------------------------
 // funktio, joka laskee TOTAL-pointsit
  function getTotalPoints() {
   return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
@@ -150,7 +160,12 @@ export default function Gameboard({ navigation, route }) {
   console.log(dicePointsTotal);
   // [0, 0, 0, 0, 15, 0]
 
+ 
+  // kierrosten määrä maksimissaan 6 ja jokaisessa kierroksessa 3 heittoa
 
+  const maxRounds = 6;
+
+ // -----------------------------------------------------------------------
   return (
     <>
       <Header />
