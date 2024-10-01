@@ -118,6 +118,8 @@ export default function Gameboard({ navigation, route }) {
         setDicePointsTotal(points);
         setSelectedDicePoints(selectedPoints);
         setNbrOfThrowsLeft(NBR_OF_THROWS);
+        // asetetaa statukseksi throw again -kun pisteet on valittu
+        setStatus('Throw dices');
         // lisätään kierroksia yhdellä jokaisen kolmen heiton jälkeen--------------------
         setCurrentTurn(prev => prev + 1)
         console.log('current-turn ' + currentTurn);
@@ -135,6 +137,8 @@ export default function Gameboard({ navigation, route }) {
 
   const throwDices = () => {
     setShowIcon(false);
+
+    // päivitetään noppien tulokset
     let spots = [...diceSpots];
     for (let i = 0; i < NBR_OF_DICES; i++) {
       if (!selectedDices[i]) {
@@ -144,28 +148,40 @@ export default function Gameboard({ navigation, route }) {
       }
     }
     setDiceSpots(spots);
-    setNbrOfThrowsLeft(nbrOfThrowsLeft - 1);
+
+    // setNbrOfThrowsLeft(nbrOfThrowsLeft - 1);
+    // console.log('heittoja nyt:' + nbrOfThrowsLeft);
+    // Laske seuraava heittojen määrä
+    const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
+    setNbrOfThrowsLeft(updatedNbrOfThrowsLeft);
+     console.log('heittoja nyt ennen tilan päivittämistä:' + updatedNbrOfThrowsLeft);
+    // päivitetään status jäljellä olevien heittojen mukaan
+    if (updatedNbrOfThrowsLeft === 0) {
+      setStatus('Select your points')
+    } else {
+      setStatus('Select and throw dices again')
+    };
   }
 
   function getSpotTotal(i) {
     return dicePointsTotal[i];
   }
 
-// ------------------------------------------------------------------------
-// funktio, joka laskee TOTAL-pointsit
- function getTotalPoints() {
-  return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
- }
+  // ------------------------------------------------------------------------
+  // funktio, joka laskee TOTAL-pointsit
+  function getTotalPoints() {
+    return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
+  }
   console.log(getTotalPoints());
   console.log(dicePointsTotal);
   // [0, 0, 0, 0, 15, 0]
 
- 
+
   // kierrosten määrä maksimissaan 6 ja jokaisessa kierroksessa 3 heittoa
 
   const maxRounds = 6;
 
- // -----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
   return (
     <>
       <Header />
@@ -190,7 +206,7 @@ export default function Gameboard({ navigation, route }) {
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
         <Text style={styles.totalPointsText}>Total: {getTotalPoints()}</Text>
-        <Text>You are 63 point away from bonus</Text>
+        <Text>You are  point away from bonus</Text>
         {/* <View style={styles.pointsRowContainer}> */}
         <Container style={styles.pointsRow} >
           <Row>{pointsRow}</Row>
