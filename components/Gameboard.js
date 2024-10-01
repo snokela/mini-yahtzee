@@ -27,6 +27,8 @@ export default function Gameboard({ navigation, route }) {
 
   // state to track turns ----------------------------
   const [currentTurn, setCurrentTurn] = useState(1);
+  // state to Totalpoints
+  const [totalPoints, setTotalPoints] = useState(0);
 
   // initial state to show the icon
   const [showIcon, setShowIcon] = useState(true);
@@ -39,6 +41,13 @@ export default function Gameboard({ navigation, route }) {
       setPlayerName(route.params.player);
     }
   }, [])
+
+// lasketaan totalPoints aina kun dicepointstotal muuttuu
+  useEffect(() => {
+    const totalPoints = dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
+    setTotalPoints(totalPoints)
+    console.log(totalPoints);
+  }, [dicePointsTotal]);
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -149,12 +158,11 @@ export default function Gameboard({ navigation, route }) {
     }
     setDiceSpots(spots);
 
-    // setNbrOfThrowsLeft(nbrOfThrowsLeft - 1);
-    // console.log('heittoja nyt:' + nbrOfThrowsLeft);
     // Laske seuraava heittojen määrä
     const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
     setNbrOfThrowsLeft(updatedNbrOfThrowsLeft);
-     console.log('heittoja nyt ennen tilan päivittämistä:' + updatedNbrOfThrowsLeft);
+    //  console.log('heittoja nyt ennen tilan päivittämistä:' + updatedNbrOfThrowsLeft);
+
     // päivitetään status jäljellä olevien heittojen mukaan
     if (updatedNbrOfThrowsLeft === 0) {
       setStatus('Select your points')
@@ -167,18 +175,7 @@ export default function Gameboard({ navigation, route }) {
     return dicePointsTotal[i];
   }
 
-  // ------------------------------------------------------------------------
-  // funktio, joka laskee TOTAL-pointsit
-  function getTotalPoints() {
-    return dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
-  }
-  console.log(getTotalPoints());
-  console.log(dicePointsTotal);
-  // [0, 0, 0, 0, 15, 0]
-
-
   // kierrosten määrä maksimissaan 6 ja jokaisessa kierroksessa 3 heittoa
-
   const maxRounds = 6;
 
   // -----------------------------------------------------------------------
@@ -205,8 +202,8 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
-        <Text style={styles.totalPointsText}>Total: {getTotalPoints()}</Text>
-        <Text>You are  point away from bonus</Text>
+        <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
+        <Text>You are { 63 - totalPoints } points away from bonus</Text>
         {/* <View style={styles.pointsRowContainer}> */}
         <Container style={styles.pointsRow} >
           <Row>{pointsRow}</Row>
