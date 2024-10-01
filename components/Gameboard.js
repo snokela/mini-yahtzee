@@ -14,7 +14,7 @@ export default function Gameboard({ navigation, route }) {
 
   const [nbrOfThrowsLeft, setNbrOfThrowsLeft] = useState(NBR_OF_THROWS);    //three throws for each turn --> there are a total of 18 throws in one game
   const [status, setStatus] = useState('Throw dices');
-  const [gameEndStatus, setGameEndStatus] = useState('false');
+  const [gameEndStatus, setGameEndStatus] = useState(false);
 
   // is dices selected or not in the game
   const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));
@@ -26,7 +26,7 @@ export default function Gameboard({ navigation, route }) {
   const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
   // state to rounds
-  const [rounds, setRounds] = useState(6);
+  const [rounds, setRounds] = useState(1);
   // state to Totalpoints
   const [totalPoints, setTotalPoints] = useState(0);
 
@@ -47,34 +47,34 @@ export default function Gameboard({ navigation, route }) {
     // lasketaan totalPoints
     const totalPoints = dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
     setTotalPoints(totalPoints)
-    // console.log('****************');
-    // console.log('total points asettamisen jälkeen' +totalPoints);
-    // console.log('nbrOfThrowsLeft nyt: ' + nbrOfThrowsLeft);
-    // console.log('rounds ennen vähentämistä: ' + rounds);
-    // // jos kierroksia jäljellä nolla, vähennetää roundsia yhdellä
-    if (nbrOfThrowsLeft === 0) {
-      setRounds(prev => prev - 1)
-    }
-  }, [dicePointsTotal, nbrOfThrowsLeft]);
+    // //jos kierroksia jäljellä nolla, lisätään roundsia yhdellä
+    // if (nbrOfThrowsLeft === 0) {
+    //   setRounds(prev => prev + 1)
+    // }
+  }, [dicePointsTotal, nbrOfThrowsLeft, selectedDicePoints]);
 
   // useEffect seuraamaan kierrosten määrää
   useEffect(() => {
-    if (rounds === 0) {
+    if (rounds === 7) {
+      console.log('rounds = 6 eli viimeinen kierros ');
       setGameEndStatus(true);
     }
+    console.log(gameEndStatus);
   }, [rounds]);
 
-
-  const handleGameEnd = () => {
-    if (rounds === 0) {
-      setGameEndStatus(true);
-      setStatus('Game Over. All points selected.')
-      // pisteiden lasku ja tallennus
-      if (totalPoints >= BONUS_POINTS_LIMIT) {
-        setTotalPoints(totalPoints + BONUS_POINTS)
-      }
+// useEffect seuraamaan gameEndStatusta
+useEffect(() => {
+  // kun peli päättyy
+  if (gameEndStatus) {
+    console.log('Peli päättyy. Kaikki pisteet valittu!');
+    setStatus('Game Over. All points selected.')
+    // pisteiden lasku
+    if (totalPoints >= BONUS_POINTS_LIMIT) {
+      setTotalPoints(prevTotalPoints => prevTotalPoints + BONUS_POINTS)
     }
+    // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
   }
+}, [gameEndStatus]);
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -141,7 +141,7 @@ export default function Gameboard({ navigation, route }) {
 
   const selectDicePoints = (i) => {
     if (nbrOfThrowsLeft === 0) {
-      let selected = [...selectedDices];
+      // let selected = [...selectedDices];
       let selectedPoints = [...selectedDicePoints];
       let points = [...dicePointsTotal];
       if (!selectedPoints[i]) {
@@ -154,6 +154,9 @@ export default function Gameboard({ navigation, route }) {
         setDicePointsTotal(points);
         setSelectedDicePoints(selectedPoints);
         setNbrOfThrowsLeft(NBR_OF_THROWS);
+
+        // vaihdetaan seuraavaan kierrokseen
+        setRounds(prev => prev + 1);
         // asetetaa statukseksi throw again -kun pisteet on valittu
         setStatus('Throw dices');
         // nollataan noppien valinnat kolmen heiton jälkeen
@@ -185,8 +188,6 @@ export default function Gameboard({ navigation, route }) {
     // Laske seuraava heittojen määrä
     setNbrOfThrowsLeft(prev => {
       const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
-      console.log('updatedNbrOfThrowsLeft: ' + updatedNbrOfThrowsLeft)
-
     // päivitetään status jäljellä olevien heittojen mukaan
     if (updatedNbrOfThrowsLeft === 0) {
       setStatus('Select your points')
@@ -224,6 +225,8 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
+        <Text>Nyt on kierros: {rounds}</Text>
+        <Text>Nyt on heittonro: {nbrOfThrowsLeft}</Text>
         <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
         {
           ((totalPoints >= BONUS_POINTS_LIMIT)
