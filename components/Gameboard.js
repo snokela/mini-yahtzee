@@ -35,29 +35,37 @@ export default function Gameboard({ navigation, route }) {
   // name of the player
   const [playerName, setPlayerName] = useState('');
 
-  // kolme useEffectiä lopulliseen versioon
+  // kolme useEffectiä lopulliseen versioon opettajalla...
   useEffect(() => {
     if (playerName === '' && route.params?.player) {
       setPlayerName(route.params.player);
     }
   }, [])
 
+  // lasketaan pisteet ja vähennetään kierroksia
   useEffect(() => {
     // lasketaan totalPoints
     const totalPoints = dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
     setTotalPoints(totalPoints)
-    console.log('****************');
-    console.log('total points asettamisen jälkeen' +totalPoints);
-    console.log('nbrOfThrowsLeft nyt: ' + nbrOfThrowsLeft);
-    console.log('rounds ennen vähentämistä: ' + rounds);
-    // jos kierroksia jäljellä nolla, vähennetää roundsia yhdellä
+    // console.log('****************');
+    // console.log('total points asettamisen jälkeen' +totalPoints);
+    // console.log('nbrOfThrowsLeft nyt: ' + nbrOfThrowsLeft);
+    // console.log('rounds ennen vähentämistä: ' + rounds);
+    // // jos kierroksia jäljellä nolla, vähennetää roundsia yhdellä
     if (nbrOfThrowsLeft === 0) {
       setRounds(prev => prev - 1)
     }
-    gameEndChecked();
   }, [dicePointsTotal, nbrOfThrowsLeft]);
 
-  const gameEndChecked = () => {
+  // useEffect seuraamaan kierrosten määrää
+  useEffect(() => {
+    if (rounds === 0) {
+      setGameEndStatus(true);
+    }
+  }, [rounds]);
+
+
+  const handleGameEnd = () => {
     if (rounds === 0) {
       setGameEndStatus(true);
       setStatus('Game Over. All points selected.')
