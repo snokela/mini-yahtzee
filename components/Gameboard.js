@@ -54,10 +54,19 @@ export default function Gameboard({ navigation, route }) {
     if (nbrOfThrowsLeft === 0) {
       setRounds(prev => prev - 1)
     }
+    gameEndChecked();
   }, [dicePointsTotal, nbrOfThrowsLeft]);
 
-
-
+  const gameEndChecked = () => {
+    if (rounds === 0) {
+      setGameEndStatus(true);
+      setStatus('Game Over. All points selected.')
+      // pisteiden lasku ja tallennus
+      if (totalPoints >= BONUS_POINTS_LIMIT) {
+        setTotalPoints(totalPoints + BONUS_POINTS)
+      }
+    }
+  }
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -166,16 +175,18 @@ export default function Gameboard({ navigation, route }) {
     setDiceSpots(spots);
 
     // Laske seuraava heittojen määrä
-    const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
-    setNbrOfThrowsLeft(updatedNbrOfThrowsLeft);
-    //  console.log('heittoja nyt ennen tilan päivittämistä:' + updatedNbrOfThrowsLeft);
+    setNbrOfThrowsLeft(prev => {
+      const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
+      console.log('updatedNbrOfThrowsLeft: ' + updatedNbrOfThrowsLeft)
 
     // päivitetään status jäljellä olevien heittojen mukaan
     if (updatedNbrOfThrowsLeft === 0) {
       setStatus('Select your points')
     } else {
       setStatus('Select and throw dices again')
-    };
+    }
+    return updatedNbrOfThrowsLeft;
+    })
   }
 
   function getSpotTotal(i) {
