@@ -65,6 +65,8 @@ export default function Gameboard({ navigation, route }) {
 // useEffect seuraamaan gameEndStatusta
 useEffect(() => {
   // kun peli päättyy
+  console.log('peli päättyy, kun kierrokse: '+rounds);
+  
   if (gameEndStatus) {
     console.log('Peli päättyy. Kaikki pisteet valittu!');
     setStatus('Game Over. All points selected.')
@@ -173,7 +175,6 @@ useEffect(() => {
 
   const throwDices = () => {
     setShowIcon(false);
-
     // päivitetään noppien tulokset
     let spots = [...diceSpots];
     for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -190,7 +191,7 @@ useEffect(() => {
       const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
     // päivitetään status jäljellä olevien heittojen mukaan
     if (updatedNbrOfThrowsLeft === 0) {
-      setStatus('Select your points')
+      setStatus('Select your points');
     } else {
       setStatus('Select and throw dices again')
     }
@@ -222,6 +223,7 @@ useEffect(() => {
         <Pressable
           style={styles.button}
           onPress={() => throwDices()}
+          disabled={nbrOfThrowsLeft === 0 || rounds === 7}
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
