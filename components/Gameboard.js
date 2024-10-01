@@ -25,8 +25,8 @@ export default function Gameboard({ navigation, route }) {
   // total points for diffferent spots
   const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
-  // state to track turns ----------------------------
-  const [currentTurn, setCurrentTurn] = useState(1);
+  // state to rounds
+  const [rounds, setRounds] = useState(6);
   // state to Totalpoints
   const [totalPoints, setTotalPoints] = useState(0);
 
@@ -42,12 +42,22 @@ export default function Gameboard({ navigation, route }) {
     }
   }, [])
 
-  // lasketaan totalPoints aina kun dicepointstotal muuttuu
   useEffect(() => {
+    // lasketaan totalPoints
     const totalPoints = dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
     setTotalPoints(totalPoints)
-    console.log(totalPoints);
-  }, [dicePointsTotal]);
+    console.log('****************');
+    console.log('total points asettamisen jälkeen' +totalPoints);
+    console.log('nbrOfThrowsLeft nyt: ' + nbrOfThrowsLeft);
+    console.log('rounds ennen vähentämistä: ' + rounds);
+    // jos kierroksia jäljellä nolla, vähennetää roundsia yhdellä
+    if (nbrOfThrowsLeft === 0) {
+      setRounds(prev => prev - 1)
+    }
+  }, [dicePointsTotal, nbrOfThrowsLeft]);
+
+
+
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -129,12 +139,9 @@ export default function Gameboard({ navigation, route }) {
         setNbrOfThrowsLeft(NBR_OF_THROWS);
         // asetetaa statukseksi throw again -kun pisteet on valittu
         setStatus('Throw dices');
-        // lisätään kierroksia yhdellä jokaisen kolmen heiton jälkeen--------------------
-        setCurrentTurn(prev => prev + 1)
-        console.log('current-turn ' + currentTurn);
         // nollataan noppien valinnat kolmen heiton jälkeen
         setSelectedDices(new Array(NBR_OF_DICES).fill(false));
-        // ----------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
         return points[i];
       } else {
         setStatus('You already selected points for ' + (i + 1));
@@ -175,10 +182,6 @@ export default function Gameboard({ navigation, route }) {
     return dicePointsTotal[i];
   }
 
-  // kierrosten määrä maksimissaan 6 ja jokaisessa kierroksessa 3 heittoa
-  const maxRounds = 6;
-
-  // -----------------------------------------------------------------------
   return (
     <>
       <Header />
