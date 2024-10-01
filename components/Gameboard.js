@@ -65,10 +65,9 @@ export default function Gameboard({ navigation, route }) {
 // useEffect seuraamaan gameEndStatusta
 useEffect(() => {
   // kun peli päättyy
-  console.log('peli päättyy, kun kierrokse: '+rounds);
-  
+  console.log('peli päättyy, kun kierrokset: '+rounds);
+
   if (gameEndStatus) {
-    console.log('Peli päättyy. Kaikki pisteet valittu!');
     setStatus('Game Over. All points selected.')
     // pisteiden lasku
     if (totalPoints >= BONUS_POINTS_LIMIT) {
@@ -85,6 +84,7 @@ useEffect(() => {
         <Pressable
           key={"dice" + i}
           onPress={() => selectDice(i)}
+          disabled={nbrOfThrowsLeft === 3}
         >
           <MaterialCommunityIcons
             name={board[i]}
@@ -132,6 +132,9 @@ useEffect(() => {
   }
 
   const selectDice = (i) => {
+    // if (nbrOfThrowsLeft === 3) {
+    //   return
+    // }
     let dices = [...selectedDices];
     dices[i] = selectedDices[i] ? false : true;  //selected/unselected/selected...
     setSelectedDices(dices);
@@ -191,7 +194,7 @@ useEffect(() => {
       const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
     // päivitetään status jäljellä olevien heittojen mukaan
     if (updatedNbrOfThrowsLeft === 0) {
-      setStatus('Select your points');
+      setStatus('Select dices and points');
     } else {
       setStatus('Select and throw dices again')
     }
@@ -219,7 +222,7 @@ useEffect(() => {
           </Container>
         )}
         <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
-        <Text style={styles.notifText}>{status}</Text>
+        <Text style={styles.statusNotifText}>{status}</Text>
         <Pressable
           style={styles.button}
           onPress={() => throwDices()}

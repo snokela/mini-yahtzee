@@ -94,6 +94,10 @@ export default StyleSheet.create({
   notifText: {
     fontSize: 18,
   },
+  statusNotifText: {
+    fontSize: 18,
+    color:'#dc376e'
+  },
   notifTextPlayer: {
     fontSize: 18,
     fontWeight: 'bold'
