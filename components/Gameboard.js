@@ -42,7 +42,7 @@ export default function Gameboard({ navigation, route }) {
     }
   }, [])
 
-// lasketaan totalPoints aina kun dicepointstotal muuttuu
+  // lasketaan totalPoints aina kun dicepointstotal muuttuu
   useEffect(() => {
     const totalPoints = dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
     setTotalPoints(totalPoints)
@@ -203,7 +203,14 @@ export default function Gameboard({ navigation, route }) {
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
         <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
-        <Text>You are { 63 - totalPoints } points away from bonus</Text>
+        {
+          ((totalPoints >= BONUS_POINTS_LIMIT)
+          ) ? (
+            <Text> Congrats! Bonus points {BONUS_POINTS} added</Text>
+          ) : (
+            <Text>You are {BONUS_POINTS_LIMIT - totalPoints} points away from bonus</Text>
+          )
+        }
         {/* <View style={styles.pointsRowContainer}> */}
         <Container style={styles.pointsRow} >
           <Row>{pointsRow}</Row>
@@ -213,7 +220,7 @@ export default function Gameboard({ navigation, route }) {
         </Container>
         {/* </View> */}
         <Text style={styles.notifTextPlayer}>Player: {playerName}</Text>
-      </View>
+      </View >
       <Footer />
     </>
   )
