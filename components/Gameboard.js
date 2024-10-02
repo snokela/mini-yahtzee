@@ -58,24 +58,35 @@ export default function Gameboard({ navigation, route }) {
     if (rounds === 7) {
       console.log('rounds = 6 eli viimeinen kierros ');
       setGameEndStatus(true);
+      setStatus('Game Over. All points selected.')
     }
     console.log(gameEndStatus);
   }, [rounds]);
 
-// useEffect seuraamaan gameEndStatusta
-useEffect(() => {
-  // kun peli päättyy
-  console.log('peli päättyy, kun kierrokset: '+rounds);
+  // useEffect seuraamaan gameEndStatusta
+  useEffect(() => {
+    // kun peli päättyy
+    console.log('peli päättyy, kun kierrokset: ' + rounds);
 
-  if (gameEndStatus) {
-    setStatus('Game Over. All points selected.')
-    // pisteiden lasku
-    if (totalPoints >= BONUS_POINTS_LIMIT) {
-      setTotalPoints(prevTotalPoints => prevTotalPoints + BONUS_POINTS)
+    if (gameEndStatus) {
+      // pisteiden lasku
+      if (totalPoints >= BONUS_POINTS_LIMIT) {
+        setTotalPoints(prevTotalPoints => prevTotalPoints + BONUS_POINTS)
+      }
+      // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
     }
-    // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
+  }, [gameEndStatus]);
+
+  const initializeGame = () => {
+    setNbrOfThrowsLeft(NBR_OF_THROWS);
+    setRounds(1);
+    setTotalPoints(0);
+    setSelectedDices(new Array(NBR_OF_DICES).fill(false));
+    setSelectedDicePoints(new Array(MAX_SPOT).fill(false));
+    setDicePointsTotal(new Array(MAX_SPOT).fill(0));
+    setStatus('Throw dices');
+    setShowIcon(true);
   }
-}, [gameEndStatus]);
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -132,9 +143,6 @@ useEffect(() => {
   }
 
   const selectDice = (i) => {
-    // if (nbrOfThrowsLeft === 3) {
-    //   return
-    // }
     let dices = [...selectedDices];
     dices[i] = selectedDices[i] ? false : true;  //selected/unselected/selected...
     setSelectedDices(dices);
@@ -177,6 +185,12 @@ useEffect(() => {
   }
 
   const throwDices = () => {
+    // if game has ended, initialize a new game
+     if (gameEndStatus) {
+      initializeGame();
+      return;
+     }
+
     setShowIcon(false);
     // päivitetään noppien tulokset
     let spots = [...diceSpots];
@@ -192,13 +206,13 @@ useEffect(() => {
     // Laske seuraava heittojen määrä
     setNbrOfThrowsLeft(prev => {
       const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
-    // päivitetään status jäljellä olevien heittojen mukaan
-    if (updatedNbrOfThrowsLeft === 0) {
-      setStatus('Select dices and points');
-    } else {
-      setStatus('Select and throw dices again')
-    }
-    return updatedNbrOfThrowsLeft;
+      // päivitetään status jäljellä olevien heittojen mukaan
+      if (updatedNbrOfThrowsLeft === 0) {
+        setStatus('Select dices and points');
+      } else {
+        setStatus('Select and throw dices again')
+      }
+      return updatedNbrOfThrowsLeft;
     })
   }
 
@@ -226,7 +240,7 @@ useEffect(() => {
         <Pressable
           style={styles.button}
           onPress={() => throwDices()}
-          disabled={nbrOfThrowsLeft === 0 || rounds === 7}
+          disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus) || (rounds === 7 && !gameEndStatus)}
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
