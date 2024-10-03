@@ -5,8 +5,6 @@ import Header from './Header';
 import Footer from './Footer';
 import { DataTable } from 'react-native-paper';
 
-
-
 const scores = [
   { id: 1, name: 'kalle', date: '6.12.2023', time: '12.15', points: 80 },
   { id: 2, name: 'matti', date: '6.12.2023', time: '12.15', points: 75 },
@@ -19,7 +17,14 @@ export default function Scoreboard() {
     <>
       <Header />
       <View>
+        <View>
+      <MaterialCommunityIcons
+                name='trophy-variant'
+                size={60}
+                color='#D87093'
+              />
         <Text>Top Six</Text>
+        </View>
         <DataTable>
           {scores.slice().map((item) => (
             <DataTable.Row key={item.id}>
