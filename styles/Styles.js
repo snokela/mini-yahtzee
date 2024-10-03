@@ -133,4 +133,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     margin: 20,
   },
+  boldText: {
+    fontWeight: 'bold',
+  },
 });
