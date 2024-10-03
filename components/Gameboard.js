@@ -62,17 +62,6 @@ export default function Gameboard({ navigation, route }) {
     }
   }, [gameEndStatus]);
 
-  const initializeGame = () => {
-    setNbrOfThrowsLeft(NBR_OF_THROWS);
-    setRounds(1);
-    setTotalPoints(0);
-    setSelectedDices(new Array(NBR_OF_DICES).fill(false));
-    setSelectedDicePoints(new Array(MAX_SPOT).fill(false));
-    setDicePointsTotal(new Array(MAX_SPOT).fill(0));
-    setStatus('Throw dices.');
-    setShowIcon(true);
-  }
-
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
     row.push(
@@ -97,7 +86,6 @@ export default function Gameboard({ navigation, route }) {
       </Col>
     );
   }
-
 
   const pointsRow = [];
   for (let spot = 0; spot < MAX_SPOT; spot++) {
@@ -145,7 +133,7 @@ export default function Gameboard({ navigation, route }) {
   const selectDicePoints = (i) => {
     // Check if there are no throws left OR if all dice have the same value
     const allSameSpots = diceSpots.every(spot => spot === diceSpots[0])
-    if ((nbrOfThrowsLeft === 0) || allSameSpots) {
+    if ((nbrOfThrowsLeft === 0) || (nbrOfThrowsLeft < 3 && allSameSpots)) {
       // let selected = [...selectedDices];
       let selectedPoints = [...selectedDicePoints];
       let points = [...dicePointsTotal];
@@ -210,6 +198,17 @@ export default function Gameboard({ navigation, route }) {
     })
   }
 
+  const initializeGame = () => {
+    setNbrOfThrowsLeft(NBR_OF_THROWS);
+    setRounds(1);
+    setTotalPoints(0);
+    setSelectedDices(new Array(NBR_OF_DICES).fill(false));
+    setSelectedDicePoints(new Array(MAX_SPOT).fill(false));
+    setDicePointsTotal(new Array(MAX_SPOT).fill(0));
+    setStatus('Throw dices.');
+    setShowIcon(true);
+  }
+
   function getSpotTotal(i) {
     return dicePointsTotal[i];
   }
@@ -238,6 +237,8 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
+        <Text>kierrokset : {rounds}</Text>
+        <Text>heittoja jäljellä: {nbrOfThrowsLeft}</Text>
         <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
         {
           ((totalPoints >= BONUS_POINTS_LIMIT)
