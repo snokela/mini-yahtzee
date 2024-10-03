@@ -13,6 +13,7 @@ const scores = [
 ]
 
 export default function Scoreboard() {
+
   return (
     <>
       <Header />
@@ -23,12 +24,12 @@ export default function Scoreboard() {
                 size={60}
                 color='#D87093'
               />
-        <Text>Top Six</Text>
+        <Text style={styles.totalPointsText}>Top Six</Text>
         </View>
         <DataTable>
-          {scores.slice().map((item) => (
+          {scores.slice().map((item, index) => (
             <DataTable.Row key={item.id}>
-              <DataTable.Cell>{item.id}</DataTable.Cell>
+              <DataTable.Cell>{index + 1}</DataTable.Cell>
               <DataTable.Cell>{item.name}</DataTable.Cell>
               <DataTable.Cell numeric>{item.date}</DataTable.Cell>
               <DataTable.Cell numeric>{item.time}</DataTable.Cell>
