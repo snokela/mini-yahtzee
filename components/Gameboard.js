@@ -94,8 +94,14 @@ export default function Gameboard({ navigation, route }) {
       <Col key={"dice" + i}>
         <Pressable
           key={"dice" + i}
-          onPress={() => selectDice(i)}
-          disabled={nbrOfThrowsLeft === 3}
+          onPress={() => {
+            if (nbrOfThrowsLeft === 3) {
+              setStatus('You have to throw dices first.')
+            } else {
+            selectDice(i)
+            }
+          }}
+          // disabled={nbrOfThrowsLeft === 3}
         >
           <MaterialCommunityIcons
             name={board[i]}
@@ -244,8 +250,6 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
-        <Text>Nyt on kierros: {rounds}</Text>
-        <Text>Nyt on heittonro: {nbrOfThrowsLeft}</Text>
         <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
         {
           ((totalPoints >= BONUS_POINTS_LIMIT)
