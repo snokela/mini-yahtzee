@@ -45,7 +45,7 @@ export default function Gameboard({ navigation, route }) {
   // use useEffect to monitor rounds
   useEffect(() => {
     if (rounds === 7) {
-      console.log('rounds = 6 eli viimeinen kierros ');
+      console.log('rounds = 7 > Game Over!');
       setGameEndStatus(true);
       setStatus('Game Over. All points selected.')
     }
@@ -53,6 +53,7 @@ export default function Gameboard({ navigation, route }) {
 
   // Use useEffect to monitor gameEnd status
   useEffect(() => {
+    console.log('ollaan gameendstatus useeffectissä eli gameendstatus: ' + gameEndStatus);
     if (gameEndStatus) {
       // points calculation
       if (totalPoints >= BONUS_POINTS_LIMIT) {
@@ -167,10 +168,11 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const throwDices = () => {
+    console.log("kierrokset: " +rounds + "ja gameEndStatus: " + gameEndStatus);
     // if game has ended, initialize a new game
     if (gameEndStatus) {
       initializeGame();
-      return;
+      return
     }
 
     setShowIcon(false);
@@ -207,6 +209,7 @@ export default function Gameboard({ navigation, route }) {
     setDicePointsTotal(new Array(MAX_SPOT).fill(0));
     setStatus('Throw dices.');
     setShowIcon(true);
+    setGameEndStatus(false);
   }
 
   function getSpotTotal(i) {
@@ -233,7 +236,7 @@ export default function Gameboard({ navigation, route }) {
         <Pressable
           style={styles.button}
           onPress={() => throwDices()}
-          disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus) || (rounds === 7 && !gameEndStatus)}
+          disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus)}
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
