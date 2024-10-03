@@ -17,7 +17,7 @@ export default function Gameboard({ navigation, route }) {
   const [gameEndStatus, setGameEndStatus] = useState(false);
   // is dices selected or not in the game
   const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));
-  // dice spots
+  // dice spots e.g [3, 5, 2, 1, 6] or [3, 3, 3, 3, 3] /throw
   const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0));
   // if dice points are selected or not for spots
   const [selectedDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
@@ -83,7 +83,7 @@ export default function Gameboard({ navigation, route }) {
             if (nbrOfThrowsLeft === 3) {
               setStatus('You have to throw dices first.')
             } else {
-            selectDice(i)
+              selectDice(i)
             }
           }}
         >
@@ -143,29 +143,36 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const selectDicePoints = (i) => {
-    if (nbrOfThrowsLeft === 0) {
+    // Check if there are no throws left OR if all dice have the same value
+    const allSameSpots = diceSpots.every(spot => spot === diceSpots[0])
+    if ((nbrOfThrowsLeft === 0) || allSameSpots) {
       // let selected = [...selectedDices];
       let selectedPoints = [...selectedDicePoints];
       let points = [...dicePointsTotal];
+
       if (!selectedPoints[i]) {
         selectedPoints[i] = true;
-        // nbrOfDices = how many dice have been rolled with the same number of spots
+        // Count how many dice match the selected face value
         let nbrOfDices = diceSpots.reduce((total, x) => (x === (i + 1) ? total + 1 : total), 0);
-        // points are calculated for the number of spots corresponding to index i.
-        // if the number of spots is 3 and it appears twice, the points will be 6 (2 * 3)
+        // // Calculate points for the selected face value (spots 3 appears twice => points (2 * 3))
         points[i] = nbrOfDices * (i + 1);
         setDicePointsTotal(points);
         setSelectedDicePoints(selectedPoints);
+
+        // Reset throws and move to the next round
         setNbrOfThrowsLeft(NBR_OF_THROWS);
         setRounds(prev => prev + 1);
         setStatus('Throw dices');
+
         // reset dice selections after three throw
         setSelectedDices(new Array(NBR_OF_DICES).fill(false));
-        // ---------------------------------------------------------------------------
+
         return points[i];
+
       } else {
         setStatus('You already selected points for ' + (i + 1) + '.');
       }
+
     } else {
       setStatus('Throw ' + NBR_OF_THROWS + ' times before setting points.')
     }
@@ -173,10 +180,10 @@ export default function Gameboard({ navigation, route }) {
 
   const throwDices = () => {
     // if game has ended, initialize a new game
-     if (gameEndStatus) {
+    if (gameEndStatus) {
       initializeGame();
       return;
-     }
+    }
 
     setShowIcon(false);
     // update dice results
