@@ -6,11 +6,11 @@ import Footer from './Footer';
 import { DataTable } from 'react-native-paper';
 
 const scores = [
-  { name: 'Kalle', date: '6.12.2023', time: '12.15', points: 80 },
+  { name: 'Kalle', date: '6.12.2023', time: '12.15', points: 120 },
   { name: 'Matti', date: '6.12.2023', time: '12.15', points: 75 },
   { name: 'Heli', date: '6.12.2023', time: '12.15', points: 55 },
   { name: 'Ritva', date: '6.12.2023', time: '12.15', points: 40 },
-  { name: 'Heli', date: '6.12.2023', time: '12.15', points: 55 },
+  { name: 'Heli', date: '6.12.2023', time: '12.15', points: 35 },
 ]
 
 export default function Scoreboard() {
@@ -52,7 +52,7 @@ const renderDataTable = (scores) => {
             <Text>{item.time}</Text>
           </DataTable.Cell>
           <DataTable.Cell numeric style={styles.pointCell}>
-            <Text style={styles.boldText}>{item.points}</Text>
+            <Text style={styles.boldText}>{item.points} pts</Text>
           </DataTable.Cell>
         </DataTable.Row>
       ))}
