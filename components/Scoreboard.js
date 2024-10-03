@@ -16,7 +16,7 @@ export default function Scoreboard() {
   return (
     <>
       <Header />
-      <View>
+      <View style={styles.scoreboardContainer}>
         <View>
       <MaterialCommunityIcons
                 name='trophy-variant'

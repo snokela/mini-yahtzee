@@ -128,4 +128,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  scoreboardContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 20,
+  },
 });
