@@ -31,19 +31,19 @@ export default function Scoreboard() {
         <DataTable>
           {scores.map((item, index) => (
             <DataTable.Row key={index + 1}>
-              <DataTable.Cell numeric>
-                <Text style={styles.rankCell}>{index + 1}.</Text>
+              <DataTable.Cell numeric style={styles.rankCell}>
+                <Text>{index + 1}.</Text>
               </DataTable.Cell>
-              <DataTable.Cell>
-                <Text style={styles.nameCell}>{item.name}</Text>
+              <DataTable.Cell style={styles.nameCell}>
+                <Text>{item.name}</Text>
               </DataTable.Cell>
-              <DataTable.Cell numeric>
-                <Text style={styles.dateCell} >{item.date}</Text>
+              <DataTable.Cell numeric style={styles.dateCell}>
+                <Text>{item.date}</Text>
               </DataTable.Cell>
-              <DataTable.Cell numeric>
-                <Text style={styles.timeCell}>{item.time}</Text>
+              <DataTable.Cell numeric style={styles.timeCell}>
+                <Text>{item.time}</Text>
               </DataTable.Cell>
-              <DataTable.Cell numeric>
+              <DataTable.Cell numeric style={styles.pointCell}>
                 <Text style={styles.boldText}>{item.points}</Text>
               </DataTable.Cell>
             </DataTable.Row>

@@ -136,4 +136,20 @@ export default StyleSheet.create({
   boldText: {
     fontWeight: 'bold',
   },
+  rankCell: {
+    flex: 1,
+    marginRight: 15,
+  },
+  nameCell: {
+    flex: 3,
+  },
+  dateCell: {
+    flex: 3,
+  },
+  timeCell: {
+    flex: 2,
+  },
+  pointCell: {
+    flex: 2,
+  },
 });
