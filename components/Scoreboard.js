@@ -72,7 +72,7 @@ export default function Scoreboard() {
             )
         }
         <Pressable style={styles.clearButton} onPress={removeScoredata}>
-          <Text>CLEAR SCOREBOARD</Text>
+          <Text style={styles.clearButtonText}>CLEAR SCOREBOARD</Text>
         </Pressable>
       </View>
       <Footer />

@@ -74,16 +74,18 @@ export default StyleSheet.create({
   button: {
     marginTop: 15,
     flexDirection: 'row',
-    padding: 10,
-    backgroundColor: '#D87093',
+    padding: 12,
+    backgroundColor: '#b15674',
+
     width: 150,
     borderRadius: 13,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonText: {
-    color:'#38383a',
-    fontSize: 18,
+    // color:'#38383a',
+    color:'white',
+    fontSize: 16,
     fontWeight: 'bold'
   },
   rulesHeadingText: {
@@ -93,10 +95,10 @@ export default StyleSheet.create({
   },
   notifText: {
     fontSize: 18,
+    color:'#b15674',
   },
   statusNotifText: {
     fontSize: 18,
-    color:'#dc376e'
   },
   notifTextPlayer: {
     fontSize: 18,
@@ -152,5 +154,19 @@ export default StyleSheet.create({
   pointCell: {
     flex: 3,
   },
-
+  clearButton: {
+    marginTop: 20,
+    flexDirection: 'row',
+    padding: 12,
+    backgroundColor: '#D3212D',
+    width: 200,
+    borderRadius: 13,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  clearButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  }
 });

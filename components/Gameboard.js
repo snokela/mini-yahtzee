@@ -290,8 +290,8 @@ export default function Gameboard({ navigation, route }) {
         >
           <Text style={styles.buttonText}>THROW DICES</Text>
         </Pressable>
-        <Text>kierrokset : {rounds}</Text>
-        <Text>heittoja jäljellä: {nbrOfThrowsLeft}</Text>
+        {/* <Text>kierrokset : {rounds}</Text>
+        <Text>heittoja jäljellä: {nbrOfThrowsLeft}</Text> */}
         <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
         {
           ((totalPoints >= BONUS_POINTS_LIMIT)
