@@ -6,7 +6,8 @@ import Footer from './Footer';
 import { DataTable } from 'react-native-paper';
 import { SCOREBOARD_KEY,  MAX_NBR_OF_SCOREBOARD_ROWS} from '../constants/Game';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const scores = [
   // { name: 'Kalle', date: '6.12.2023', time: '12.15', points: 120 },
@@ -32,8 +33,14 @@ export default function Scoreboard() {
     const getData = async () => {
       try {
         const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
-        const storedData =  jsonValue != null ? JSON.parse(jsonValue) : [];
-        // jos pisteet löytyy niin sortataan storedData ja asetetaan  scoresiin
+        const storedScores =  jsonValue != null ? JSON.parse(jsonValue) : [];
+        // if ther is storedData in async. > sort that and take 5 biggest points
+        if (storedScores) {
+         const sortedScores = [...storedScores].sort((a,b) => b.points- a.points).slice(0, MAX_NBR_OF_SCOREBOARD_ROWS)
+         setScores(sortedScores)
+        }
+        // jos pisteet löytyy niin sortataan storedData ja asetetaan  scoresiin viisi parasta tulosta
+        //  0 -> MAX_NBR_OF_SCOREBOARD_ROWS
         // For sorting scoreboard data according to number of points you can use sort()
         // function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
       } catch (e) {

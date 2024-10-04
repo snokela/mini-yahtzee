@@ -55,7 +55,7 @@ export default function Gameboard({ navigation, route }) {
   // Use useEffect to monitor gameEnd status
   useEffect(() => {
     const saveGameResult = async () => {
-      // console.log('ollaan gameendstatus useEffectissä eli gameendstatus: ' + gameEndStatus);
+      console.log('ollaan gameendstatus useEffectissä eli gameendstatus: ' + gameEndStatus);
       if (gameEndStatus) {
         const currentDate = new Date().toLocaleDateString();
         const now = new Date();
@@ -63,6 +63,7 @@ export default function Gameboard({ navigation, route }) {
 
         // finalpoints calculation
         const finalPoints = calculatePoints();
+        console.log('finalPoints on: ' +finalPoints);
         setTotalPoints(finalPoints);
 
         // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
@@ -78,10 +79,11 @@ export default function Gameboard({ navigation, route }) {
             await storeData(updatedStoredData);
           }
         } catch (e) {
-          console.log(e);
+          console.log('storageen tallennus ei toimi' +e);
         }
       }
     }
+    saveGameResult();
   }, [gameEndStatus]);
 
   const calculatePoints = () => {
@@ -97,7 +99,7 @@ export default function Gameboard({ navigation, route }) {
       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
-      console.log(e);
+      console.log('datan haku ei onnistu' +e);
     }
   };
 
@@ -107,7 +109,7 @@ export default function Gameboard({ navigation, route }) {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
     } catch (e) {
-      console.log(e);
+      console.log('datan tallennus ei onnistu:' +e);
     }
   };
 
