@@ -152,4 +152,5 @@ export default StyleSheet.create({
   pointCell: {
     flex: 3,
   },
+
 });

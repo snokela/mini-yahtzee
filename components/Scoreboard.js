@@ -71,7 +71,9 @@ export default function Scoreboard() {
               renderDataTable(scores)
             )
         }
-        <Button onPress={removeScoredata} title='CLEAR SCOREBOARD'></Button>
+        <Pressable style={styles.clearButton} onPress={removeScoredata}>
+          <Text>CLEAR SCOREBOARD</Text>
+        </Pressable>
       </View>
       <Footer />
     </>
