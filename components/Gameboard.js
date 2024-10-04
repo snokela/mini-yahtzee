@@ -69,6 +69,15 @@ export default function Gameboard({ navigation, route }) {
     }
   }, [gameEndStatus]);
 
+    // save scoredata to asyncstorage
+    const storeData = async (scores) => {
+      try {
+        const jsonValue = JSON.stringify(scores);
+        await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
