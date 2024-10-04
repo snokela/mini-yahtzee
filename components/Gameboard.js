@@ -60,6 +60,9 @@ export default function Gameboard({ navigation, route }) {
       const currentTime = new Date().toLocaleTimeString();
       // finalpoints calculation
       const finalPoints = calculatePoints();
+      setTotalPoints(finalPoints);
+      console.log('storageen talletettava pistemäärä: ' + finalPoints);
+
       // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
       const scores = [
         { name: playerName, date: currentDate, time: currentTime, points: finalPoints }
