@@ -58,18 +58,23 @@ export default function Gameboard({ navigation, route }) {
     if (gameEndStatus) {
       const currentDate = new Date().toLocaleDateString();
       const currentTime = new Date().toLocaleTimeString();
-      // points calculation
-      if (totalPoints >= BONUS_POINTS_LIMIT) {
-        setTotalPoints(prevTotalPoints => prevTotalPoints + BONUS_POINTS)
-      }
+      // finalpoints calculation
+      const finalPoints = calculatePoints();
       // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
       const scores = [
-        { name: playerName, date: currentDate, time: currentTime, points: totalPoints }
+        { name: playerName, date: currentDate, time: currentTime, points: finalPoints }
       ];
       // save to asyncstorage
       storeData(scores);
     }
   }, [gameEndStatus]);
+
+  const calculatePoints = () => {
+    if (totalPoints >= BONUS_POINTS_LIMIT) {
+      return totalPoints + BONUS_POINTS
+    }
+     return totalPoints;
+  };
 
     // get earlier data from asyncstorage
     const getData = async () => {
