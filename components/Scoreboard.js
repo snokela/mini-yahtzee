@@ -9,19 +9,10 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const scores = [
-  // { name: 'Kalle', date: '6.12.2023', time: '12.15', points: 120 },
-  // { name: 'Matti', date: '6.12.2023', time: '12.15', points: 75 },
-  // { name: 'Heli', date: '6.12.2023', time: '12.15', points: 55 },
-  // { name: 'Ritva', date: '6.12.2023', time: '12.15', points: 40 },
-  // { name: 'Heli', date: '6.12.2023', time: '12.15', points: 35 },
-]
-
 export default function Scoreboard() {
 
   const [scores, setScores] = useState([]);
 
-  // LISÄÄ TÄHÄN useFOCUSEffec esim renderöimään aina kun screeni avataan uudelleen!
   // https://reactnavigation.org/docs/function-after-focusing-screen/
   useFocusEffect(
     useCallback(() => {
@@ -55,10 +46,6 @@ export default function Scoreboard() {
         const sortedScores = [...storedScores].sort((a, b) => b.points - a.points).slice(0, MAX_NBR_OF_SCOREBOARD_ROWS)
         setScores(sortedScores)
       }
-      // jos pisteet löytyy niin sortataan storedData ja asetetaan  scoresiin viisi parasta tulosta
-      //  0 -> MAX_NBR_OF_SCOREBOARD_ROWS
-      // For sorting scoreboard data according to number of points you can use sort()
-      // function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
     } catch (e) {
       console.log(e);
     }
