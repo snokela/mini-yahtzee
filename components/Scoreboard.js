@@ -5,6 +5,8 @@ import Header from './Header';
 import Footer from './Footer';
 import { DataTable } from 'react-native-paper';
 import { SCOREBOARD_KEY,  MAX_NBR_OF_SCOREBOARD_ROWS} from '../constants/Game';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 
 const scores = [
   // { name: 'Kalle', date: '6.12.2023', time: '12.15', points: 120 },
@@ -16,21 +18,30 @@ const scores = [
 
 export default function Scoreboard() {
 
+  const [scores, setScores] = useState([]);
+
   // LISÄÄ TÄHÄN useFOCUSEffec esim renderöimään aina kun screeni avataan uudelleen!
   // https://reactnavigation.org/docs/function-after-focusing-screen/
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+    }, [])
+  )
 
     // get earlier data from asyncstorage
     const getData = async () => {
       try {
         const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
+        const storedData =  jsonValue != null ? JSON.parse(jsonValue) : [];
+        // jos pisteet löytyy niin sortataan storedData ja asetetaan  scoresiin
+        // For sorting scoreboard data according to number of points you can use sort()
+        // function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
       } catch (e) {
         console.log(e);
       }
     };
 
-  // For sorting scoreboard data according to number of points you can use sort()
-// function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
+
 
   return (
     <>
