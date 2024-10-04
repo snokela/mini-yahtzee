@@ -6,7 +6,6 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    // marginTop: 30,
     marginBottom: 15,
     backgroundColor: '#D8BFD8',
     flexDirection: 'row',
@@ -32,33 +31,14 @@ export default StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  // gameboard: {
-  //   backgroundColor: '#fff',
-  //   alignItems: 'center',
-  //   justifyContent: 'center'
-  // },
-  // gameinfo: {
-  //   backgroundColor: '#fff',
-  //   textAlign: 'center',
-  //   justifyContent: 'center',
-  //   fontSize: 20,
-  //   marginTop: 10
-  // },
   diceRow: {
     marginVertical: 15,
     paddingHorizontal: 45,
     justifyContent: 'space-around',
-
   },
-  // pointsRowContainer: {
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   marginTop: 15,
-  // },
   pointsRow: {
     paddingHorizontal: 45,
     justifyContent: 'space-around',
-    // alignItems: 'center',
     marginLeft: 25,
     marginTop: 20,
   },
@@ -66,24 +46,18 @@ export default StyleSheet.create({
     paddingHorizontal: 45,
     justifyContent: 'space-around',
     marginBottom: 20,
-    // alignItems: 'center',
   },
-  // flex: {
-  //   flexDirection: "row"
-  // },
   button: {
     marginTop: 15,
     flexDirection: 'row',
     padding: 12,
     backgroundColor: '#b15674',
-
     width: 150,
     borderRadius: 13,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonText: {
-    // color:'#38383a',
     color:'white',
     fontSize: 16,
     fontWeight: 'bold'
@@ -96,9 +70,11 @@ export default StyleSheet.create({
   notifText: {
     fontSize: 18,
     color:'#b15674',
+    marginTop: 10,
   },
   statusNotifText: {
     fontSize: 18,
+    marginBottom: 10,
   },
   notifTextPlayer: {
     fontSize: 18,
@@ -155,7 +131,7 @@ export default StyleSheet.create({
     flex: 3,
   },
   clearButton: {
-    marginTop: 20,
+    marginTop: 25,
     flexDirection: 'row',
     padding: 12,
     backgroundColor: '#D3212D',

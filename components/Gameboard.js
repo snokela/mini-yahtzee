@@ -242,7 +242,7 @@ export default function Gameboard({ navigation, route }) {
       const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
       // update status based on nbrofthrowsleft
       if (updatedNbrOfThrowsLeft === 0) {
-        setStatus('Select dices and points.');
+        setStatus('Select points.');
       } else {
         setStatus('Select and throw dices again.')
       }
