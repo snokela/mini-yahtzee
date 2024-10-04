@@ -3,9 +3,10 @@ import { Pressable, Text, View } from 'react-native'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Header from './Header';
 import Footer from './Footer';
-import { NBR_OF_DICES, NBR_OF_THROWS, MIN_SPOT, MAX_SPOT, BONUS_POINTS_LIMIT, BONUS_POINTS } from '../constants/Game';
+import { NBR_OF_DICES, NBR_OF_THROWS, MIN_SPOT, MAX_SPOT, BONUS_POINTS_LIMIT, BONUS_POINTS, SCOREBOARD_KEY } from '../constants/Game';
 import { Container, Row, Col } from 'react-native-flex-grid';
 import styles from '../styles/Styles'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // game board status
 let board = [];
@@ -55,13 +56,19 @@ export default function Gameboard({ navigation, route }) {
   useEffect(() => {
     console.log('ollaan gameendstatus useeffectissä eli gameendstatus: ' + gameEndStatus);
     if (gameEndStatus) {
+      const currentDate = new Date().toLocaleDateString();
+      const currentTime = new Date().toLocaleTimeString();
       // points calculation
       if (totalPoints >= BONUS_POINTS_LIMIT) {
         setTotalPoints(prevTotalPoints => prevTotalPoints + BONUS_POINTS)
       }
       // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
+      const scores = [
+        { name: playerName, date: currentDate, time: currentTime, points: totalPoints }
+      ]
     }
   }, [gameEndStatus]);
+
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
@@ -168,7 +175,7 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const throwDices = () => {
-    console.log("kierrokset: " +rounds + "ja gameEndStatus: " + gameEndStatus);
+    console.log("kierrokset: " + rounds + "ja gameEndStatus: " + gameEndStatus);
     // if game has ended, initialize a new game
     if (gameEndStatus) {
       initializeGame();

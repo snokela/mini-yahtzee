@@ -15,6 +15,12 @@ const scores = [
 
 export default function Scoreboard() {
 
+  // LISÄÄ TÄHÄN useFOCUSEffec esim renderöimään aina kun screeni avataan uudelleen!
+  // https://reactnavigation.org/docs/function-after-focusing-screen/
+
+  // For sorting scoreboard data according to number of points you can use sort()
+// function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
+
   return (
     <>
       <Header />
@@ -28,13 +34,13 @@ export default function Scoreboard() {
           <Text style={styles.totalPointsText}>Top Five</Text>
         </View>
         {
-            !scores.length ?
+          !scores.length ?
             (
               <Text style={styles.boldText}>Scoreboard is empty</Text>
             ) : (
               renderDataTable(scores)
             )
-          }
+        }
       </View>
       <Footer />
     </>
