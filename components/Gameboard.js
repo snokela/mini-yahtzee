@@ -65,14 +65,16 @@ export default function Gameboard({ navigation, route }) {
       // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
       const scores = [
         { name: playerName, date: currentDate, time: currentTime, points: totalPoints }
-      ]
+      ];
+      // save to asyncstorage
+      storeData(scores);
     }
   }, [gameEndStatus]);
 
     // save scoredata to asyncstorage
-    const storeData = async (scores) => {
+    const storeData = async (value) => {
       try {
-        const jsonValue = JSON.stringify(scores);
+        const jsonValue = JSON.stringify(value);
         await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
       } catch (e) {
         console.log(e);
