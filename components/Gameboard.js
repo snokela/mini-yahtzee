@@ -54,24 +54,33 @@ export default function Gameboard({ navigation, route }) {
 
   // Use useEffect to monitor gameEnd status
   useEffect(() => {
-    console.log('ollaan gameendstatus useeffectissä eli gameendstatus: ' + gameEndStatus);
-    if (gameEndStatus) {
-      const currentDate = new Date().toLocaleDateString();
-      const now = new Date();
-      const currentTime = now.getHours() + ':' + now.getMinutes();
-      console.log('currentDate on nyt: '+ currentDate);
-      console.log('currentTime on nyt: '+ currentTime);
+    const saveGameResult = async () => {
+      // console.log('ollaan gameendstatus useEffectissä eli gameendstatus: ' + gameEndStatus);
+      if (gameEndStatus) {
+        const currentDate = new Date().toLocaleDateString();
+        const now = new Date();
+        const currentTime = now.getHours() + ':' + now.getMinutes();
 
-      // finalpoints calculation
-      const finalPoints = calculatePoints();
-      setTotalPoints(finalPoints);
+        // finalpoints calculation
+        const finalPoints = calculatePoints();
+        setTotalPoints(finalPoints);
 
-      // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
-      const scores = [
-        { name: playerName, date: currentDate, time: currentTime, points: finalPoints }
-      ];
-      // save to asyncstorage
-      storeData(scores);
+        // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
+        const scores = { name: playerName, date: currentDate, time: currentTime, points: finalPoints };
+
+        // save to asyncstorage
+        try {
+          const storedData = await getData();
+          if (storedData === null) {
+            await storeData([scores]); //saved scores as a new array
+          } else {
+            const updatedStoredData = [...storedData, scores];
+            await storeData(updatedStoredData);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
     }
   }, [gameEndStatus]);
 
@@ -79,28 +88,28 @@ export default function Gameboard({ navigation, route }) {
     if (totalPoints >= BONUS_POINTS_LIMIT) {
       return totalPoints + BONUS_POINTS
     }
-     return totalPoints;
+    return totalPoints;
   };
 
-    // get earlier data from asyncstorage
-    const getData = async () => {
-      try {
-       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
-       return jsonValue != null ?  JSON.parse(jsonValue) : null;
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  // get earlier data from asyncstorage
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-    // save scoredata to asyncstorage
-    const storeData = async (value) => {
-      try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  // save scoredata to asyncstorage
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
