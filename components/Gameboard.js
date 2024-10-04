@@ -71,6 +71,16 @@ export default function Gameboard({ navigation, route }) {
     }
   }, [gameEndStatus]);
 
+    // get earlier data from asyncstorage
+    const getData = async () => {
+      try {
+       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
+       return jsonValue != null ?  JSON.parse(jsonValue) : null;
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
     // save scoredata to asyncstorage
     const storeData = async (value) => {
       try {
