@@ -1,10 +1,10 @@
-import { Text, View } from 'react-native'
+import { Button, Pressable, Text, View } from 'react-native'
 import styles from '../styles/Styles'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Header from './Header';
 import Footer from './Footer';
 import { DataTable } from 'react-native-paper';
-import { SCOREBOARD_KEY,  MAX_NBR_OF_SCOREBOARD_ROWS} from '../constants/Game';
+import { SCOREBOARD_KEY, MAX_NBR_OF_SCOREBOARD_ROWS } from '../constants/Game';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,26 +29,40 @@ export default function Scoreboard() {
     }, [])
   )
 
-    // get earlier data from asyncstorage
-    const getData = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
-        const storedScores =  jsonValue != null ? JSON.parse(jsonValue) : [];
-        // if ther is storedData in async. > sort that and take 5 biggest points
-        if (storedScores) {
-         const sortedScores = [...storedScores].sort((a,b) => b.points- a.points).slice(0, MAX_NBR_OF_SCOREBOARD_ROWS)
-         setScores(sortedScores)
-        }
-        // jos pisteet löytyy niin sortataan storedData ja asetetaan  scoresiin viisi parasta tulosta
-        //  0 -> MAX_NBR_OF_SCOREBOARD_ROWS
-        // For sorting scoreboard data according to number of points you can use sort()
-        // function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
-      } catch (e) {
-        console.log(e);
+  // remove scoredata from asyncstorage
+  const removeScoredata = async () => {
+    try {
+      if (scores.length > 0) {
+        await AsyncStorage.removeItem(SCOREBOARD_KEY);
+        console.log('Data removed from AsyncStorage');
       }
-    };
+    } catch (e) {
+      console.log(e);
+    }
+    setScores([]);
+  }
 
+  // get data from asyncstorage
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
+      const storedScores = jsonValue != null ? JSON.parse(jsonValue) : [];
 
+      console.log("Stored Scores: ", storedScores);
+
+      // if ther is storedData in async. > sort that and take 5 biggest points
+      if (storedScores) {
+        const sortedScores = [...storedScores].sort((a, b) => b.points - a.points).slice(0, MAX_NBR_OF_SCOREBOARD_ROWS)
+        setScores(sortedScores)
+      }
+      // jos pisteet löytyy niin sortataan storedData ja asetetaan  scoresiin viisi parasta tulosta
+      //  0 -> MAX_NBR_OF_SCOREBOARD_ROWS
+      // For sorting scoreboard data according to number of points you can use sort()
+      // function: HUOM! MUISTA UUSI taulukko const järjestetty = [...scores]
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>
@@ -70,6 +84,7 @@ export default function Scoreboard() {
               renderDataTable(scores)
             )
         }
+        <Button onPress={removeScoredata} title='CLEAR SCOREBOARD'></Button>
       </View>
       <Footer />
     </>
