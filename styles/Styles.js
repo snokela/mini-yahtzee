@@ -60,7 +60,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   buttonText: {
-    color:'white',
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold'
   },
@@ -71,7 +71,7 @@ export default StyleSheet.create({
   },
   notifText: {
     fontSize: 18,
-    color:'#b15674',
+    color: '#b15674',
     marginTop: 10,
     marginBottom: 10,
   },
@@ -94,6 +94,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // height: Dimensions.get('screen').height,
+  },
+  labelText: {
+    marginTop: 15,
+    marginBottom: 10,
   },
   rulesContainer: {
     alignItems: 'stretch',
@@ -118,7 +122,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 20,
-      // height: Dimensions.get('screen').height,
+    // height: Dimensions.get('screen').height,
   },
   boldText: {
     fontWeight: 'bold',
@@ -154,7 +158,10 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
- safeAreaView: {
-  flex: 1,
- },
+  safeAreaView: {
+    flex: 1,
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
 });

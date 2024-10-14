@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, TextInput, Pressable, Keyboard, SafeAreaView } from 'react-native';
+import { Text, View, TextInput, Pressable, Keyboard, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Header from './Header';
 import Footer from './Footer';
@@ -19,6 +19,10 @@ export default function Home({ navigation }) {
   }
 
   return (
+    <KeyboardAvoidingView
+      style={styles.keyboardAvoidingView}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
     <SafeAreaView style={styles.safeAreaView}>
       <Header />
       <View style={styles.homeContainer}>
@@ -29,7 +33,7 @@ export default function Home({ navigation }) {
         />
         {!hasPlayerName ? (
           <>
-            <Text>For scoreboard enter your name...</Text>
+            <Text style={styles.labelText}>For scoreboard enter your name...</Text>
             <TextInput
               onChangeText={setPlayerName}
               autoFocus={true}
@@ -86,5 +90,6 @@ export default function Home({ navigation }) {
       </View >
       <Footer />
     </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
