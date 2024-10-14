@@ -1,4 +1,4 @@
-import { Button, Pressable, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import styles from '../styles/Styles'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Header from './Header';
@@ -58,7 +58,7 @@ export default function Scoreboard() {
         <View>
           <MaterialCommunityIcons
             name='trophy-variant'
-            size={90}
+            size={80}
             color='#D87093'
           />
           <Text style={styles.totalPointsText}>Top Five</Text>
