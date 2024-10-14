@@ -58,7 +58,7 @@ export default function Scoreboard() {
         <View>
           <MaterialCommunityIcons
             name='trophy-variant'
-            size={60}
+            size={90}
             color='#D87093'
           />
           <Text style={styles.totalPointsText}>Top Five</Text>

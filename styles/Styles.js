@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: '#fff',
+  // },
   header: {
     marginBottom: 15,
     backgroundColor: '#D8BFD8',
@@ -13,7 +13,9 @@ export default StyleSheet.create({
   footer: {
     marginTop: 20,
     backgroundColor: '#D8BFD8',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    // position: 'absolute',
+    // bottom: 0,
   },
   title: {
     color: '#fff',
@@ -33,17 +35,17 @@ export default StyleSheet.create({
   },
   diceRow: {
     marginVertical: 15,
-    paddingHorizontal: 45,
+    paddingHorizontal: 20,
     justifyContent: 'space-around',
   },
   pointsRow: {
-    paddingHorizontal: 45,
+    paddingHorizontal: 20,
     justifyContent: 'space-around',
     marginLeft: 25,
     marginTop: 20,
   },
   pointsToSelectRow: {
-    paddingHorizontal: 45,
+    paddingHorizontal: 20,
     justifyContent: 'space-around',
     marginBottom: 20,
   },
@@ -71,6 +73,7 @@ export default StyleSheet.create({
     fontSize: 18,
     color:'#b15674',
     marginTop: 10,
+    marginBottom: 10,
   },
   statusNotifText: {
     fontSize: 18,
@@ -87,8 +90,10 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
   homeContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    // height: Dimensions.get('screen').height,
   },
   rulesContainer: {
     alignItems: 'stretch',
@@ -103,13 +108,17 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   gameboardContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    // height: Dimensions.get('screen').height,
   },
   scoreboardContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 20,
+      // height: Dimensions.get('screen').height,
   },
   boldText: {
     fontWeight: 'bold',
@@ -144,5 +153,8 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-  }
+  },
+ safeAreaView: {
+  flex: 1,
+ },
 });

@@ -273,7 +273,7 @@ export default function Gameboard({ navigation, route }) {
         {showIcon ? (
           <MaterialCommunityIcons
             name='dice-multiple'
-            size={80}
+            size={90}
             color='#D87093'
           />
         ) : (

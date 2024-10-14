@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, TextInput, Pressable, Keyboard } from 'react-native';
+import { Text, View, TextInput, Pressable, Keyboard, SafeAreaView } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Header from './Header';
 import Footer from './Footer';
@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
   }
 
   return (
-    <>
+    <SafeAreaView style={styles.safeAreaView}>
       <Header />
       <View style={styles.homeContainer}>
         <MaterialCommunityIcons
@@ -85,6 +85,6 @@ export default function Home({ navigation }) {
         }
       </View >
       <Footer />
-    </>
+    </SafeAreaView>
   )
 }
