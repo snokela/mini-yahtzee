@@ -63,26 +63,34 @@ export default function Gameboard({ navigation, route }) {
 
         // finalpoints calculation
         const finalPoints = calculatePoints();
-        console.log('finalPoints on: ' +finalPoints);
+        console.log('finalPoints on: ' + finalPoints);
         setTotalPoints(finalPoints);
 
-        // tallennetaan pelin tiedot asyncstorageen eli kutsutaan esim saveGameResult funktiota
-        const scores = { name: playerName, date: currentDate, time: currentTime, points: finalPoints };
+        // gamedata
+        const scores = {
+          name: playerName,
+          date: currentDate,
+          time: currentTime,
+          points: finalPoints,
+        };
 
         // save to asyncstorage
         try {
           const storedData = await getData();
           if (storedData === null) {
             await storeData([scores]); //saved scores as a new array
+            console.log('Gameboard: No previous data found. Created new scoreboard entry.');
           } else {
             const updatedStoredData = [...storedData, scores];
             await storeData(updatedStoredData);
+            console.log('Gameboard: Previous data found. Updated scoreboard with new entry for' + playerName );
           }
         } catch (e) {
-          console.log('storageen tallennus ei toimi' +e);
+          console.log('Gameboard: Error saving data for ' + playerName  + ' - ' + e.message);
         }
       }
     }
+
     saveGameResult();
   }, [gameEndStatus]);
 
@@ -99,7 +107,7 @@ export default function Gameboard({ navigation, route }) {
       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
-      console.log('datan haku ei onnistu' +e);
+      console.log('datan haku ei onnistu' + e);
     }
   };
 
@@ -109,7 +117,7 @@ export default function Gameboard({ navigation, route }) {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
     } catch (e) {
-      console.log('datan tallennus ei onnistu:' +e);
+      console.log('datan tallennus ei onnistu:' + e);
     }
   };
 
@@ -281,7 +289,18 @@ export default function Gameboard({ navigation, route }) {
             <Row>{row}</Row>
           </Container>
         )}
-        <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
+        {rounds !== 7 && (
+          <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
+        )}
+        {/* {
+          ((rounds === 7)
+        ) ? (
+          <Text style={styles.notifText}>Throws left: 0</Text>
+        ) : (
+          <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
+        )
+        } */}
+        {/* <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text> */}
         <Text style={styles.statusNotifText}>{status}</Text>
         <Pressable
           style={styles.button}
@@ -289,12 +308,12 @@ export default function Gameboard({ navigation, route }) {
           disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus)}
         >
           {
-            ((rounds === 7 )
-          ) ? (
-            <Text style={styles.buttonText}>START NEW GAME</Text>
-          ) : (
-            <Text style={styles.buttonText}>THROW DICES</Text>
-          )
+            ((rounds === 7)
+            ) ? (
+              <Text style={styles.buttonText}>START NEW GAME</Text>
+            ) : (
+              <Text style={styles.buttonText}>THROW DICES</Text>
+            )
           }
           {/* <Text style={styles.buttonText}>THROW DICES</Text> */}
         </Pressable>
