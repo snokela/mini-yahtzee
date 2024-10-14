@@ -288,7 +288,15 @@ export default function Gameboard({ navigation, route }) {
           onPress={() => throwDices()}
           disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus)}
         >
-          <Text style={styles.buttonText}>THROW DICES</Text>
+          {
+            ((rounds === 7 )
+          ) ? (
+            <Text style={styles.buttonText}>START NEW GAME</Text>
+          ) : (
+            <Text style={styles.buttonText}>THROW DICES</Text>
+          )
+          }
+          {/* <Text style={styles.buttonText}>THROW DICES</Text> */}
         </Pressable>
         {/* <Text>kierrokset : {rounds}</Text>
         <Text>heittoja jäljellä: {nbrOfThrowsLeft}</Text> */}
