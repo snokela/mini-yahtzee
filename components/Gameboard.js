@@ -83,10 +83,10 @@ export default function Gameboard({ navigation, route }) {
           } else {
             const updatedStoredData = [...storedData, scores];
             await storeData(updatedStoredData);
-            console.log('Gameboard: Previous data found. Updated scoreboard with new entry for' + playerName );
+            console.log('Gameboard: Previous data found. Updated scoreboard with new entry for' + playerName);
           }
         } catch (e) {
-          console.log('Gameboard: Error saving data for ' + playerName  + ' - ' + e.message);
+          console.log('Gameboard: Error saving data for ' + playerName + ' - ' + e.message);
         }
       }
     }
@@ -226,7 +226,10 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const throwDices = () => {
-    console.log("kierrokset: " + rounds + "ja gameEndStatus: " + gameEndStatus);
+    console.log('HEITETÄÄN NOPPAA!!!');
+    // console.log("kierrokset: " + rounds + "ja gameEndStatus: " + gameEndStatus);
+    console.log('heittoja jäljellä : ' + nbrOfThrowsLeft);
+
     // if game has ended, initialize a new game
     if (gameEndStatus) {
       initializeGame();
@@ -247,7 +250,7 @@ export default function Gameboard({ navigation, route }) {
 
     // calculate the next nbr of throw
     setNbrOfThrowsLeft(prev => {
-      const updatedNbrOfThrowsLeft = nbrOfThrowsLeft - 1;
+      const updatedNbrOfThrowsLeft = prev - 1;
       // update status based on nbrofthrowsleft
       if (updatedNbrOfThrowsLeft === 0) {
         setStatus('Select points.');
@@ -289,23 +292,19 @@ export default function Gameboard({ navigation, route }) {
             <Row>{row}</Row>
           </Container>
         )}
-        {rounds !== 7 && (
-          <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
-        )}
-        {/* {
-          ((rounds === 7)
-        ) ? (
-          <Text style={styles.notifText}>Throws left: 0</Text>
-        ) : (
-          <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text>
-        )
-        } */}
-        {/* <Text style={styles.notifText}>Throws left: {nbrOfThrowsLeft}</Text> */}
+        <Text style={styles.notifText}>Throws left: {(rounds === 7) ? 0 : nbrOfThrowsLeft} </Text>
         <Text style={styles.statusNotifText}>{status}</Text>
         <Pressable
           style={styles.button}
-          onPress={() => throwDices()}
-          disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus)}
+          // onPress={() => throwDices()}
+          // disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus)}
+          onPress={() => {
+            if (nbrOfThrowsLeft === 0 && !gameEndStatus) {
+              setStatus('Select your points before next throw.');
+            } else {
+              throwDices();
+            }
+          }}
         >
           {
             ((rounds === 7)
