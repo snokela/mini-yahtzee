@@ -209,7 +209,7 @@ export default function Gameboard({ navigation, route }) {
         // Reset throws and move to the next round
         setNbrOfThrowsLeft(NBR_OF_THROWS);
         setRounds(prev => prev + 1);
-        setStatus('Throw dices');
+        setStatus('Throw dices.');
 
         // reset dice selections after three throw
         setSelectedDices(new Array(NBR_OF_DICES).fill(false));

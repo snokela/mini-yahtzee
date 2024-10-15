@@ -28,21 +28,26 @@ export default StyleSheet.create({
     margin: 10,
   },
   diceRow: {
-    marginBottom: 20,
+    // marginBottom: 20,
     // marginVertical: 15,
-    // paddingHorizontal: 20,
+    paddingHorizontal: 35,
     justifyContent: 'space-between',
   },
   pointsRow: {
     // paddingHorizontal: 20,
+    paddingHorizontal: 35,
     justifyContent: 'space-between',
     marginLeft: 25,
     marginTop: 20,
   },
   pointsToSelectRow: {
     // paddingHorizontal: 20,
+    paddingHorizontal: 35,
     justifyContent: 'space-between',
     marginBottom: 20,
+  },
+  iconCol: {
+    marginHorizontal: -10,
   },
   button: {
     marginTop: 15,
