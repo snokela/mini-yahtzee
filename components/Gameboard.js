@@ -57,8 +57,8 @@ export default function Gameboard({ navigation, route }) {
       if (gameEndStatus) {
         const now = new Date();
         const currentDate = now.getDate() + '.' +  (now.getMonth() +1) + '.' + now.getFullYear();
-        const currentTime = now.getHours() + ':' + now.getMinutes();
-        console.log('currentdate on: ' + currentDate)
+        const currentTime = now.getHours() + ':' + now.getMinutes().toString().padStart(2, '0');
+        console.log('currentTime on : ' + currentTime);
 
         // finalpoints calculation
         const finalPoints = calculatePoints();
