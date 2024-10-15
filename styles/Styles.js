@@ -37,7 +37,7 @@ export default StyleSheet.create({
     // paddingHorizontal: 20,
     paddingHorizontal: 35,
     justifyContent: 'space-between',
-    marginLeft: 25,
+    // marginLeft: 25,
     marginTop: 20,
   },
   pointsToSelectRow: {
@@ -47,7 +47,8 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   iconCol: {
-    marginHorizontal: -10,
+    // marginHorizontal: -10,
+    alignItems: 'center',
   },
   button: {
     marginTop: 15,
