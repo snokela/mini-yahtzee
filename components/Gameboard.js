@@ -46,7 +46,6 @@ export default function Gameboard({ navigation, route }) {
   // use useEffect to monitor rounds
   useEffect(() => {
     if (rounds === 7) {
-      console.log('rounds = 7 > Game Over!');
       setGameEndStatus(true);
       setStatus('Game Over. All points selected.')
     }
@@ -55,15 +54,13 @@ export default function Gameboard({ navigation, route }) {
   // Use useEffect to monitor gameEnd status
   useEffect(() => {
     const saveGameResult = async () => {
-      console.log('ollaan gameendstatus useEffectissä eli gameendstatus: ' + gameEndStatus);
       if (gameEndStatus) {
-        const currentDate = new Date().toLocaleDateString();
         const now = new Date();
+        const currentDate = now.getDay() + '.' +  now.getMonth() + '.' + now.getFullYear();
         const currentTime = now.getHours() + ':' + now.getMinutes();
 
         // finalpoints calculation
         const finalPoints = calculatePoints();
-        console.log('finalPoints on: ' + finalPoints);
         setTotalPoints(finalPoints);
 
         // gamedata
@@ -78,12 +75,12 @@ export default function Gameboard({ navigation, route }) {
         try {
           const storedData = await getData();
           if (storedData === null) {
-            await storeData([scores]); //saved scores as a new array
             console.log('Gameboard: No previous data found. Created new scoreboard entry.');
+            await storeData([scores]); //saved scores as a new array
           } else {
             const updatedStoredData = [...storedData, scores];
+            console.log('Gameboard: Previous data found. Updated scoreboard with new entry for ' + playerName);
             await storeData(updatedStoredData);
-            console.log('Gameboard: Previous data found. Updated scoreboard with new entry for' + playerName);
           }
         } catch (e) {
           console.log('Gameboard: Error saving data for ' + playerName + ' - ' + e.message);
@@ -107,7 +104,7 @@ export default function Gameboard({ navigation, route }) {
       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
-      console.log('datan haku ei onnistu' + e);
+      console.log('Failed to retrieve data from AsyncStorage: ' + e.message);
     }
   };
 
@@ -117,7 +114,7 @@ export default function Gameboard({ navigation, route }) {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(SCOREBOARD_KEY, jsonValue);
     } catch (e) {
-      console.log('datan tallennus ei onnistu:' + e);
+      console.log('Failed to save data to AsyncStorage: ' + e.message);
     }
   };
 
@@ -201,7 +198,7 @@ export default function Gameboard({ navigation, route }) {
         selectedPoints[i] = true;
         // Count how many dice match the selected face value
         let nbrOfDices = diceSpots.reduce((total, x) => (x === (i + 1) ? total + 1 : total), 0);
-        // // Calculate points for the selected face value (spots 3 appears twice => points (2 * 3))
+        // Calculate points for the selected face value (spots 3 appears twice => points (2 * 3))
         points[i] = nbrOfDices * (i + 1);
         setDicePointsTotal(points);
         setSelectedDicePoints(selectedPoints);
@@ -226,10 +223,6 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const throwDices = () => {
-    console.log('HEITETÄÄN NOPPAA!!!');
-    // console.log("kierrokset: " + rounds + "ja gameEndStatus: " + gameEndStatus);
-    console.log('heittoja jäljellä : ' + nbrOfThrowsLeft);
-
     // if game has ended, initialize a new game
     if (gameEndStatus) {
       initializeGame();
@@ -296,8 +289,6 @@ export default function Gameboard({ navigation, route }) {
         <Text style={styles.statusNotifText}>{status}</Text>
         <Pressable
           style={styles.button}
-          // onPress={() => throwDices()}
-          // disabled={(nbrOfThrowsLeft === 0 && !gameEndStatus)}
           onPress={() => {
             if (nbrOfThrowsLeft === 0 && !gameEndStatus) {
               setStatus('Select your points before next throw.');
@@ -324,14 +315,12 @@ export default function Gameboard({ navigation, route }) {
             <Text>You are {BONUS_POINTS_LIMIT - totalPoints} points away from bonus.</Text>
           )
         }
-        {/* <View style={styles.pointsRowContainer}> */}
         <Container style={styles.pointsRow} >
           <Row>{pointsRow}</Row>
         </Container>
         <Container style={styles.pointsToSelectRow}>
           <Row>{pointsToSelectRow}</Row>
         </Container>
-        {/* </View> */}
         <Text style={styles.notifTextPlayer}>Player: {playerName}</Text>
       </View >
       <Footer />

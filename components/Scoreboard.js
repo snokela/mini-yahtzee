@@ -38,9 +38,6 @@ export default function Scoreboard() {
     try {
       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
       const storedScores = jsonValue != null ? JSON.parse(jsonValue) : [];
-
-      console.log("Stored Scores: ", storedScores);
-
       // if ther is storedData in async. > sort that and take 5 biggest points
       if (storedScores) {
         const sortedScores = [...storedScores].sort((a, b) => b.points - a.points).slice(0, MAX_NBR_OF_SCOREBOARD_ROWS)
