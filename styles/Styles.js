@@ -1,10 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: '#fff',
-  // },
   header: {
     marginBottom: 15,
     backgroundColor: '#D8BFD8',
@@ -14,8 +10,6 @@ export default StyleSheet.create({
     marginTop: 20,
     backgroundColor: '#D8BFD8',
     flexDirection: 'row',
-    // position: 'absolute',
-    // bottom: 0,
   },
   title: {
     color: '#fff',
@@ -34,19 +28,20 @@ export default StyleSheet.create({
     margin: 10,
   },
   diceRow: {
-    marginVertical: 15,
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
+    marginBottom: 20,
+    // marginVertical: 15,
+    // paddingHorizontal: 20,
+    justifyContent: 'space-between',
   },
   pointsRow: {
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
+    // paddingHorizontal: 20,
+    justifyContent: 'space-between',
     marginLeft: 25,
     marginTop: 20,
   },
   pointsToSelectRow: {
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
+    // paddingHorizontal: 20,
+    justifyContent: 'space-between',
     marginBottom: 20,
   },
   button: {

@@ -53,8 +53,8 @@ export default function Home({ navigation }) {
                 <Text style={styles.paragraphHeading}>THE GAME: </Text>
                 Upper section of the classic Yahtzee
                 dice game. You have {NBR_OF_DICES} dices and
-                for the every dice you have {NBR_OF_THROWS}
-                throws. After each throw you can keep dices in
+                for the every dice you have {NBR_OF_THROWS} throws.
+                After each throw you can keep dices in
                 order to get same dice spot counts as many as
                 possible. In the end of the turn you must select
                 your points from {MIN_SPOT} to {MAX_SPOT}.
@@ -71,10 +71,8 @@ export default function Home({ navigation }) {
               </Text>
               <Text style={styles.paragraph}>
                 <Text style={styles.paragraphHeading}>GOAL: </Text>
-                To get points as much as possible.
-                {BONUS_POINTS_LIMIT} points is the limit of
-                getting bonus which gives you {BONUS_POINTS}
-                points more.
+                To get points as much as possible. {BONUS_POINTS_LIMIT} points is the limit of
+                getting bonus which gives you {BONUS_POINTS} points more.
               </Text>
             </View>
             <Text style={styles.notifText}>Good luck, {playerName}!</Text>

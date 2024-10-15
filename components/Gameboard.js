@@ -124,7 +124,7 @@ export default function Gameboard({ navigation, route }) {
   const row = [];
   for (let i = 0; i < NBR_OF_DICES; i++) {
     row.push(
-      <Col key={"dice" + i}>
+      <Col key={"dice" + i} style={styles.iconCol}>
         <Pressable
           key={"dice" + i}
           onPress={() => {
@@ -149,7 +149,7 @@ export default function Gameboard({ navigation, route }) {
   const pointsRow = [];
   for (let spot = 0; spot < MAX_SPOT; spot++) {
     pointsRow.push(
-      <Col key={'pointsRow' + spot}>
+      <Col key={'pointsRow' + spot} style={styles.iconCol}>
         <Text key={'pointsRow' + spot}>{getSpotTotal(spot)}</Text>
       </Col>
     )
@@ -159,7 +159,7 @@ export default function Gameboard({ navigation, route }) {
   const pointsToSelectRow = [];
   for (let diceButton = 0; diceButton < MAX_SPOT; diceButton++) {
     pointsToSelectRow.push(
-      <Col Col key={'buttonsRow' + diceButton} >
+      <Col Col key={'buttonsRow' + diceButton} style={styles.iconCol}>
         <Pressable
           key={'buttonsRow' + diceButton}
           onPress={() => selectDicePoints(diceButton)}
@@ -314,10 +314,7 @@ export default function Gameboard({ navigation, route }) {
               <Text style={styles.buttonText}>THROW DICES</Text>
             )
           }
-          {/* <Text style={styles.buttonText}>THROW DICES</Text> */}
         </Pressable>
-        {/* <Text>kierrokset : {rounds}</Text>
-        <Text>heittoja jäljellä: {nbrOfThrowsLeft}</Text> */}
         <Text style={styles.totalPointsText}>Total: {totalPoints}</Text>
         {
           ((totalPoints >= BONUS_POINTS_LIMIT)
