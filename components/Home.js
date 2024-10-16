@@ -28,7 +28,7 @@ export default function Home({ navigation }) {
       <View style={styles.homeContainer}>
         <MaterialCommunityIcons
           name='information'
-          size={80}
+          size={70}
           color='#D87093'
         />
         {!hasPlayerName ? (

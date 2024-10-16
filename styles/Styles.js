@@ -30,19 +30,20 @@ export default StyleSheet.create({
   diceRow: {
     // marginBottom: 20,
     // marginVertical: 15,
-    paddingHorizontal: 35,
+    paddingHorizontal: 20,
+    // paddingHorizontal: 35,
     justifyContent: 'space-between',
   },
   pointsRow: {
-    // paddingHorizontal: 20,
-    paddingHorizontal: 35,
+    paddingHorizontal: 20,
+    // paddingHorizontal: 35,
     justifyContent: 'space-between',
     // marginLeft: 25,
     marginTop: 20,
   },
   pointsToSelectRow: {
-    // paddingHorizontal: 20,
-    paddingHorizontal: 35,
+    paddingHorizontal: 20,
+    // paddingHorizontal: 35,
     justifyContent: 'space-between',
     marginBottom: 20,
   },
@@ -53,7 +54,7 @@ export default StyleSheet.create({
   button: {
     marginTop: 15,
     flexDirection: 'row',
-    padding: 12,
+    padding: 10,
     backgroundColor: '#b15674',
     width: 200,
     borderRadius: 13,
@@ -73,7 +74,7 @@ export default StyleSheet.create({
   notifText: {
     fontSize: 18,
     color: '#b15674',
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 10,
   },
   statusNotifText: {
@@ -136,18 +137,18 @@ export default StyleSheet.create({
     flex: 3,
   },
   dateCell: {
-    flex: 3,
+    flex: 4,
   },
   timeCell: {
-    flex: 2,
+    flex: 3,
   },
   pointCell: {
     flex: 3,
   },
   clearButton: {
-    marginTop: 25,
+    marginTop: 30,
     flexDirection: 'row',
-    padding: 12,
+    padding: 10,
     backgroundColor: '#D3212D',
     width: 200,
     borderRadius: 13,

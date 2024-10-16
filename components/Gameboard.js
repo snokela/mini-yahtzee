@@ -58,7 +58,6 @@ export default function Gameboard({ navigation, route }) {
         const now = new Date();
         const currentDate = now.getDate() + '.' +  (now.getMonth() +1) + '.' + now.getFullYear();
         const currentTime = now.getHours() + ':' + now.getMinutes().toString().padStart(2, '0');
-        console.log('currentTime on : ' + currentTime);
 
         // finalpoints calculation
         const finalPoints = calculatePoints();
@@ -165,7 +164,7 @@ export default function Gameboard({ navigation, route }) {
           <MaterialCommunityIcons
             name={'numeric-' + (diceButton + 1) + '-circle'} //numeric-1-circle...
             key={'buttonsRow' + diceButton}
-            size={35}
+            size={30}
             color={getDicePointsColor(diceButton)}
           />
         </Pressable>
@@ -278,7 +277,7 @@ export default function Gameboard({ navigation, route }) {
         {showIcon ? (
           <MaterialCommunityIcons
             name='dice-multiple'
-            size={90}
+            size={80}
             color='#D87093'
           />
         ) : (
