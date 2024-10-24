@@ -37,7 +37,7 @@ export default function Gameboard({ navigation, route }) {
     }
   }, [])
 
-  // use useEffect to calclute points and reduce rounds
+  // use useEffect to calculate points and reduce rounds
   useEffect(() => {
     const totalPoints = dicePointsTotal.reduce((prevPoints, currentPoints) => prevPoints + currentPoints, 0)
     setTotalPoints(totalPoints)
@@ -190,7 +190,6 @@ export default function Gameboard({ navigation, route }) {
     // Check if there are no throws left OR if all dice have the same value
     const allSameSpots = diceSpots.every(spot => spot === diceSpots[0])
     if ((nbrOfThrowsLeft === 0) || (nbrOfThrowsLeft < 3 && allSameSpots)) {
-      // let selected = [...selectedDices];
       let selectedPoints = [...selectedDicePoints];
       let points = [...dicePointsTotal];
 
@@ -223,7 +222,6 @@ export default function Gameboard({ navigation, route }) {
   }
 
   const throwDices = () => {
-    // if game has ended, initialize a new game
     if (gameEndStatus) {
       initializeGame();
       return
